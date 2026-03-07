@@ -1,21 +1,19 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // =========================================================================
-  // 1. Preloader
-  // =========================================================================
-  const preloader = document.getElementById('preloader');
-
-  function hidePreloader() {
-    if (preloader) {
-      preloader.classList.add('loaded');
+// Immediate preloader hide (runs as soon as script is parsed)
+(function() {
+  var p = document.getElementById('preloader');
+  if (p) {
+    // If page already loaded, hide now
+    if (document.readyState === 'complete') {
+      p.classList.add('loaded');
     }
+    // Always hide on window load
+    window.addEventListener('load', function() { p.classList.add('loaded'); });
+    // Safety timeout - never show preloader for more than 2 seconds
+    setTimeout(function() { p.classList.add('loaded'); }, 2000);
   }
+})();
 
-  if (document.readyState === 'complete') {
-    hidePreloader();
-  } else {
-    window.addEventListener('load', hidePreloader);
-    setTimeout(hidePreloader, 5000);
-  }
+document.addEventListener('DOMContentLoaded', function () {
 
   // =========================================================================
   // 2. Navbar Scroll Effect
