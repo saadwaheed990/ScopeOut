@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book your driving lessons online with Impulse Driving School Manchester. Easy online booking, flexible scheduling, instant confirmation.">
+    <title>Book Driving Lessons | Impulse Driving School Manchester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .booking-section { padding: 2rem 0 5rem; }
+
+        /* Progress Steps */
+        .progress-steps { display: flex; justify-content: center; align-items: center; margin-bottom: 3rem; gap: 0; }
+        .progress-step { display: flex; align-items: center; gap: 0.5rem; position: relative; }
+        .progress-step .step-circle {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: #e2e8f0; color: #64748b;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.9rem; transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        .progress-step.active .step-circle { background: var(--primary, #1a73e8); color: #fff; }
+        .progress-step.completed .step-circle { background: var(--accent, #00c9a7); color: #fff; }
+        .progress-step .step-label { font-size: 0.85rem; color: #64748b; font-weight: 500; white-space: nowrap; }
+        .progress-step.active .step-label { color: var(--primary, #1a73e8); font-weight: 600; }
+        .progress-step.completed .step-label { color: var(--accent, #00c9a7); }
+        .step-connector { width: 60px; height: 3px; background: #e2e8f0; margin: 0 0.5rem; flex-shrink: 0; }
+        .step-connector.completed { background: var(--accent, #00c9a7); }
+
+        /* Booking Steps */
+        .booking-step { display: none; animation: fadeIn 0.3s ease; }
+        .booking-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .step-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #0a1628; }
+        .step-subtitle { color: #64748b; margin-bottom: 2rem; }
+
+        /* Transmission Toggle */
+        .transmission-toggle {
+            display: flex; background: #f1f5f9; border-radius: 12px;
+            padding: 4px; margin-bottom: 2rem; max-width: 300px;
+        }
+        .transmission-toggle button {
+            flex: 1; padding: 0.75rem 1.5rem; border: none; border-radius: 10px;
+            background: transparent; font-weight: 600; cursor: pointer;
+            transition: all 0.3s; font-size: 0.95rem; color: #64748b;
+        }
+        .transmission-toggle button.active { background: #fff; color: var(--primary, #1a73e8); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+        /* Course Cards */
+        .course-select-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .course-select-card {
+            border: 2px solid #e2e8f0; border-radius: 16px; padding: 1.5rem;
+            cursor: pointer; transition: all 0.3s; position: relative;
+        }
+        .course-select-card:hover { border-color: var(--primary, #1a73e8); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(26,115,232,0.1); }
+        .course-select-card.selected { border-color: var(--primary, #1a73e8); background: rgba(26,115,232,0.03); }
+        .course-select-card.selected::after {
+            content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; top: 1rem; right: 1rem; color: var(--primary, #1a73e8); font-size: 1.2rem;
+        }
+        .course-select-card h4 { font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 0.25rem; color: #0a1628; }
+        .course-select-card .course-meta { font-size: 0.85rem; color: #64748b; margin-bottom: 0.5rem; }
+        .course-select-card .course-price-tag { font-size: 1.25rem; font-weight: 700; color: var(--primary, #1a73e8); }
+        .course-popular {
+            position: absolute; top: -1px; left: 1.5rem;
+            background: var(--warm, #ff6b35); color: #fff;
+            font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.75rem;
+            border-radius: 0 0 8px 8px; text-transform: uppercase;
+        }
+
+        /* Calendar */
+        .calendar-container {
+            background: #fff; border: 1px solid #e2e8f0; border-radius: 16px;
+            padding: 1.5rem; margin-bottom: 2rem; max-width: 450px;
+        }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .calendar-header h4 { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; }
+        .calendar-header button {
+            background: none; border: 1px solid #e2e8f0; border-radius: 8px;
+            width: 36px; height: 36px; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; transition: all 0.2s;
+        }
+        .calendar-header button:hover { background: #f1f5f9; }
+        .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 0.5rem; }
+        .calendar-weekdays span { font-size: 0.75rem; font-weight: 600; color: #94a3b8; padding: 0.5rem 0; }
+        .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+        .calendar-day {
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            border-radius: 10px; font-size: 0.9rem; font-weight: 500;
+            cursor: pointer; transition: all 0.2s; color: #334155;
+        }
+        .calendar-day:hover:not(.disabled):not(.empty) { background: #e8f0fe; }
+        .calendar-day.today { border: 2px solid var(--primary, #1a73e8); }
+        .calendar-day.selected { background: var(--primary, #1a73e8); color: #fff; }
+        .calendar-day.disabled { color: #cbd5e1; cursor: not-allowed; }
+        .calendar-day.empty { cursor: default; }
+
+        /* Time Slots */
+        .time-slots-container { margin-bottom: 2rem; }
+        .time-slots-container h4 { font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 0.5rem; font-size: 1rem; }
+        .time-period { margin-bottom: 1rem; }
+        .time-period-label { font-size: 0.8rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .time-slots { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .time-slot {
+            padding: 0.6rem 1.2rem; border: 2px solid #e2e8f0; border-radius: 10px;
+            cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: all 0.2s;
+            background: #fff; color: #334155;
+        }
+        .time-slot:hover { border-color: var(--primary, #1a73e8); }
+        .time-slot.selected { background: var(--primary, #1a73e8); color: #fff; border-color: var(--primary, #1a73e8); }
+
+        /* Instructor & Area Select */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: #334155; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 0.75rem 1rem; border: 2px solid #e2e8f0;
+            border-radius: 10px; font-size: 0.95rem; font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s; background: #fff; color: #334155;
+            box-sizing: border-box;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--primary, #1a73e8);
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-group .error-msg { color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none; }
+        .form-group.error input, .form-group.error select { border-color: #ef4444; }
+        .form-group.error .error-msg { display: block; }
+
+        /* Radio Options */
+        .radio-options { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .radio-option {
+            padding: 0.6rem 1.2rem; border: 2px solid #e2e8f0; border-radius: 10px;
+            cursor: pointer; font-weight: 500; transition: all 0.2s;
+        }
+        .radio-option:hover { border-color: var(--primary, #1a73e8); }
+        .radio-option.selected { background: var(--primary, #1a73e8); color: #fff; border-color: var(--primary, #1a73e8); }
+
+        /* Summary Card */
+        .summary-card {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px;
+            padding: 2rem; margin-bottom: 2rem;
+        }
+        .summary-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 1.5rem; }
+        .summary-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e2e8f0; }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-label { color: #64748b; font-size: 0.9rem; }
+        .summary-value { font-weight: 600; color: #0a1628; }
+        .summary-total { display: flex; justify-content: space-between; padding: 1rem 0 0; margin-top: 0.5rem; border-top: 2px solid #0a1628; }
+        .summary-total .summary-value { font-size: 1.25rem; color: var(--primary, #1a73e8); }
+
+        /* Terms */
+        .terms-check { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 2rem; }
+        .terms-check input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary, #1a73e8); }
+        .terms-check label { font-size: 0.9rem; color: #64748b; line-height: 1.5; cursor: pointer; }
+
+        /* Navigation Buttons */
+        .step-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+        .step-nav .btn { min-width: 150px; }
+
+        /* Success Modal */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10,22,40,0.6); z-index: 10000;
+            align-items: center; justify-content: center; padding: 1rem;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: #fff; border-radius: 20px; padding: 3rem;
+            max-width: 500px; width: 100%; text-align: center;
+            animation: modalIn 0.4s ease;
+        }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-checkmark {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, #00c9a7, #00b894);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem; font-size: 2rem; color: #fff;
+            animation: checkPop 0.5s ease 0.2s both;
+        }
+        @keyframes checkPop { from { transform: scale(0); } 50% { transform: scale(1.2); } to { transform: scale(1); } }
+        .modal-content h2 { font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 0.5rem; }
+        .modal-ref { background: #f1f5f9; padding: 0.75rem 1.5rem; border-radius: 10px; display: inline-block; margin: 1rem 0; font-weight: 700; font-size: 1.1rem; color: var(--primary, #1a73e8); }
+        .modal-content p { color: #64748b; line-height: 1.6; }
+        .modal-actions { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+
+        /* Contact Info Note */
+        .booking-note {
+            background: linear-gradient(135deg, #e8f0fe, #f0f9ff);
+            border-radius: 12px; padding: 1.25rem; margin-bottom: 2rem;
+            display: flex; align-items: flex-start; gap: 0.75rem;
+        }
+        .booking-note i { color: var(--primary, #1a73e8); font-size: 1.1rem; margin-top: 2px; }
+        .booking-note p { margin: 0; font-size: 0.9rem; color: #334155; line-height: 1.5; }
+
+        @media (max-width: 768px) {
+            .progress-steps { flex-wrap: wrap; gap: 0.5rem; }
+            .step-connector { width: 30px; }
+            .progress-step .step-label { display: none; }
+            .course-select-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .step-nav { flex-direction: column; }
+            .step-nav .btn { width: 100%; }
+            .modal-content { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon"><i class="fas fa-car-side"></i></span>
+                <span class="logo-text">Impulse<span class="logo-accent">Drive</span></span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="areas.html">Areas</a>
+                <a href="contact.html">Contact</a>
+                <a href="booking.html" class="nav-cta active">Book Now</a>
+            </div>
+            <div class="nav-actions">
+                <a href="tel:07368543368" class="nav-phone"><i class="fas fa-phone"></i> 07368 543 368</a>
+                <a href="booking.html" class="btn btn-primary btn-sm">Book Now</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Book Online</span>
+            </div>
+            <h1>Book Your <span class="text-gradient">Driving Lessons</span></h1>
+            <p>Select your course, pick a date, and you're all set. We'll confirm within 2 hours.</p>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container" style="max-width: 800px;">
+
+            <div class="booking-note">
+                <i class="fas fa-info-circle"></i>
+                <p><strong>Quick & Easy:</strong> Complete your booking in under 2 minutes. A member of our team will contact you within 2 hours to confirm your slot and arrange payment. You can also call us directly at <a href="tel:07368543368"><strong>07368 543 368</strong></a>.</p>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Select Course</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Date & Time</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Your Details</span>
+                </div>
+                <div class="step-connector"></div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">Confirm</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Course Selection -->
+            <div class="booking-step active" id="step1">
+                <h3 class="step-title">Choose Your Course</h3>
+                <p class="step-subtitle">Select transmission type and your preferred course package.</p>
+
+                <div class="transmission-toggle">
+                    <button class="active" data-type="manual">Manual</button>
+                    <button data-type="automatic">Automatic</button>
+                </div>
+
+                <div class="course-select-grid" id="courseGrid">
+                    <div class="course-select-card" data-course="payg" data-price-manual="72" data-price-auto="74">
+                        <h4>Pay As You Go</h4>
+                        <div class="course-meta">2 Hours Per Session</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">72</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="beginner" data-price-manual="330" data-price-auto="330">
+                        <div class="course-popular">Popular</div>
+                        <h4>Beginner Course</h4>
+                        <div class="course-meta">10 Hours &bull; Flexible Schedule</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">330</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="block" data-price-manual="340" data-price-auto="350">
+                        <h4>Block Booking</h4>
+                        <div class="course-meta">10 Hours &bull; Flexible Schedule</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">340</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="intensive6" data-price-manual="465" data-price-auto="465">
+                        <h4>Intensive 6 Hours</h4>
+                        <div class="course-meta">6 Hours &bull; 1-2 Weeks</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">465</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="intensive10" data-price-manual="695" data-price-auto="695">
+                        <h4>Intensive 10 Hours</h4>
+                        <div class="course-meta">10 Hours &bull; 1-2 Weeks</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">695</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="intensive20" data-price-manual="1295" data-price-auto="1295">
+                        <div class="course-popular">Best Value</div>
+                        <h4>Intensive 20 Hours</h4>
+                        <div class="course-meta">20 Hours &bull; 1-4 Weeks</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">1,295</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="intensive30" data-price-manual="1695" data-price-auto="1695">
+                        <h4>Intensive 30 Hours</h4>
+                        <div class="course-meta">30 Hours &bull; 1-8 Weeks</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">1,695</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="intensive40" data-price-manual="1895" data-price-auto="1895">
+                        <h4>Intensive 40 Hours</h4>
+                        <div class="course-meta">40 Hours &bull; 2-10 Weeks</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">1,895</span></div>
+                    </div>
+                    <div class="course-select-card" data-course="guaranteed" data-price-manual="2995" data-price-auto="2995">
+                        <div class="course-popular">Premium</div>
+                        <h4>Guaranteed Pass</h4>
+                        <div class="course-meta">Unlimited Hours &bull; Until You Pass</div>
+                        <div class="course-price-tag">£<span class="dynamic-price">2,995</span></div>
+                    </div>
+                </div>
+
+                <div class="step-nav">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep(1)">Next: Choose Date & Time <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Step 2: Date & Time -->
+            <div class="booking-step" id="step2">
+                <h3 class="step-title">Select Date & Time</h3>
+                <p class="step-subtitle">Choose your preferred start date and time slot.</p>
+
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button onclick="changeMonth(-1)" aria-label="Previous month"><i class="fas fa-chevron-left"></i></button>
+                        <h4 id="calendarMonth"></h4>
+                        <button onclick="changeMonth(1)" aria-label="Next month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                    </div>
+                    <div class="calendar-days" id="calendarDays"></div>
+                </div>
+
+                <div class="time-slots-container">
+                    <h4>Select a Time Slot</h4>
+                    <div class="time-period">
+                        <div class="time-period-label">Morning</div>
+                        <div class="time-slots">
+                            <div class="time-slot" data-time="08:00">8:00 AM</div>
+                            <div class="time-slot" data-time="09:00">9:00 AM</div>
+                            <div class="time-slot" data-time="10:00">10:00 AM</div>
+                            <div class="time-slot" data-time="11:00">11:00 AM</div>
+                        </div>
+                    </div>
+                    <div class="time-period">
+                        <div class="time-period-label">Afternoon</div>
+                        <div class="time-slots">
+                            <div class="time-slot" data-time="12:00">12:00 PM</div>
+                            <div class="time-slot" data-time="13:00">1:00 PM</div>
+                            <div class="time-slot" data-time="14:00">2:00 PM</div>
+                            <div class="time-slot" data-time="15:00">3:00 PM</div>
+                        </div>
+                    </div>
+                    <div class="time-period">
+                        <div class="time-period-label">Evening</div>
+                        <div class="time-slots">
+                            <div class="time-slot" data-time="16:00">4:00 PM</div>
+                            <div class="time-slot" data-time="17:00">5:00 PM</div>
+                            <div class="time-slot" data-time="18:00">6:00 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="instructor">Preferred Instructor</label>
+                        <select id="instructor">
+                            <option value="no-preference">No Preference</option>
+                            <option value="asad">Asad (Automatic Specialist)</option>
+                            <option value="martin">Martin (98% Pass Rate)</option>
+                            <option value="bahjat">Bahjat (Manual & Automatic)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickupArea">Pick-Up Location / Area</label>
+                        <input type="text" id="pickupArea" placeholder="e.g., Manchester City Centre, Bolton...">
+                    </div>
+                </div>
+
+                <div class="step-nav">
+                    <button class="btn btn-outline" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(2)">Next: Your Details <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Step 3: Personal Details -->
+            <div class="booking-step" id="step3">
+                <h3 class="step-title">Your Details</h3>
+                <p class="step-subtitle">Tell us a bit about yourself so we can prepare for your lessons.</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" placeholder="John Smith" required>
+                        <div class="error-msg">Please enter your full name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                        <div class="error-msg">Please enter a valid email address</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" placeholder="07xxx xxxxxx" required>
+                        <div class="error-msg">Please enter a valid phone number</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have a provisional licence? *</label>
+                    <div class="radio-options" id="licenceOptions">
+                        <div class="radio-option" data-value="yes">Yes</div>
+                        <div class="radio-option" data-value="no">No</div>
+                        <div class="radio-option" data-value="applied">Applied / Waiting</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Previous Driving Experience</label>
+                    <div class="radio-options" id="experienceOptions">
+                        <div class="radio-option selected" data-value="none">None</div>
+                        <div class="radio-option" data-value="some">Some (1-10 hours)</div>
+                        <div class="radio-option" data-value="significant">Significant (10+ hours)</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Contact Method</label>
+                    <div class="radio-options" id="contactMethod">
+                        <div class="radio-option selected" data-value="phone">Phone</div>
+                        <div class="radio-option" data-value="email">Email</div>
+                        <div class="radio-option" data-value="whatsapp">WhatsApp</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Special Requirements / Notes</label>
+                    <textarea id="notes" placeholder="e.g., I'm a nervous driver, I need an instructor who speaks Urdu, I'm only available on weekends..."></textarea>
+                </div>
+
+                <div class="step-nav">
+                    <button class="btn btn-outline" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">Next: Review & Confirm <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Step 4: Confirmation -->
+            <div class="booking-step" id="step4">
+                <h3 class="step-title">Review & Confirm</h3>
+                <p class="step-subtitle">Please review your booking details before confirming.</p>
+
+                <div class="summary-card">
+                    <h3><i class="fas fa-car" style="color: var(--primary, #1a73e8); margin-right: 0.5rem;"></i> Booking Summary</h3>
+                    <div class="summary-row"><span class="summary-label">Course</span><span class="summary-value" id="sumCourse">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Transmission</span><span class="summary-value" id="sumTransmission">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value" id="sumDate">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Time</span><span class="summary-value" id="sumTime">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Instructor</span><span class="summary-value" id="sumInstructor">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Pick-Up Area</span><span class="summary-value" id="sumArea">-</span></div>
+                    <div class="summary-total"><span class="summary-label" style="font-weight:700; font-size: 1.1rem;">Total Price</span><span class="summary-value" id="sumPrice">-</span></div>
+                </div>
+
+                <div class="summary-card">
+                    <h3><i class="fas fa-user" style="color: var(--primary, #1a73e8); margin-right: 0.5rem;"></i> Personal Details</h3>
+                    <div class="summary-row"><span class="summary-label">Name</span><span class="summary-value" id="sumName">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Email</span><span class="summary-value" id="sumEmail">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Phone</span><span class="summary-value" id="sumPhone">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Provisional Licence</span><span class="summary-value" id="sumLicence">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Experience</span><span class="summary-value" id="sumExperience">-</span></div>
+                    <div class="summary-row"><span class="summary-label">Contact Via</span><span class="summary-value" id="sumContact">-</span></div>
+                </div>
+
+                <div class="terms-check">
+                    <input type="checkbox" id="termsCheck">
+                    <label for="termsCheck">I agree to the terms and conditions. I understand that a team member will contact me within 2 hours to confirm my booking and arrange payment.</label>
+                </div>
+
+                <div class="step-nav">
+                    <button class="btn btn-outline" onclick="prevStep(4)"><i class="fas fa-arrow-left"></i> Back</button>
+                    <button class="btn btn-primary btn-lg" onclick="confirmBooking()" id="confirmBtn">
+                        <i class="fas fa-check-circle"></i> Confirm Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="modal-checkmark"><i class="fas fa-check"></i></div>
+            <h2>Booking Request Submitted!</h2>
+            <div class="modal-ref" id="bookingRef">IMP-00000</div>
+            <p>Thank you for choosing Impulse Driving School! A member of our team will contact you <strong>within 2 hours</strong> to confirm your booking and arrange payment.</p>
+            <p style="margin-top: 1rem;"><strong>What happens next?</strong></p>
+            <p>1. We'll confirm your date & time<br>2. You'll receive payment details<br>3. Your instructor will be assigned<br>4. Pick-up details will be arranged</p>
+            <div class="modal-actions">
+                <a href="https://wa.me/447368543368" class="btn btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="../index.html" class="btn btn-outline">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon"><i class="fas fa-car-side"></i></span>
+                        <span class="logo-text">Impulse<span class="logo-accent">Drive</span></span>
+                    </a>
+                    <p>Manchester's premier driving school with a 93% first-time pass rate. Building safe, confident drivers since 2017.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/ImpulseDriveUK/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/impulsedrive/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@ImpulseDrive" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@impulsedrive" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="pricing.html">Pricing</a>
+                    <a href="areas.html">Areas Covered</a>
+                    <a href="booking.html">Book Now</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Courses</h4>
+                    <a href="pricing.html">Pay As You Go</a>
+                    <a href="pricing.html">Intensive Courses</a>
+                    <a href="pricing.html">Block Bookings</a>
+                    <a href="pricing.html">Guaranteed Pass</a>
+                    <a href="pricing.html">Automatic Lessons</a>
+                    <a href="pricing.html">Refresher Courses</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <a href="tel:07368543368">07368 543 368</a>
+                            <a href="tel:01614920547">0161 492 0547</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@impulsedrive.co.uk">info@impulsedrive.co.uk</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Spaces, Oxford St,<br>Manchester, M1 5AN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Impulse Driving School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/447368543368" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="../js/main.js"></script>
+    <script>
+    // Booking System JavaScript
+    (function() {
+        // State
+        let currentStep = 1;
+        let selectedCourse = null;
+        let selectedTransmission = 'manual';
+        let selectedDate = null;
+        let selectedTime = null;
+        let selectedLicence = null;
+        let selectedExperience = 'none';
+        let selectedContact = 'phone';
+
+        const courseNames = {
+            'payg': 'Pay As You Go',
+            'beginner': 'Beginner Course (10hrs)',
+            'block': 'Block Booking (10hrs)',
+            'intensive6': 'Intensive 6 Hours',
+            'intensive10': 'Intensive 10 Hours',
+            'intensive20': 'Intensive 20 Hours',
+            'intensive30': 'Intensive 30 Hours',
+            'intensive40': 'Intensive 40 Hours',
+            'guaranteed': 'Guaranteed Pass (Unlimited)'
+        };
+
+        // Calendar
+        let calendarDate = new Date();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        function renderCalendar() {
+            const monthEl = document.getElementById('calendarMonth');
+            const daysEl = document.getElementById('calendarDays');
+            if (!monthEl || !daysEl) return;
+
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            monthEl.textContent = months[month] + ' ' + year;
+
+            const firstDay = new Date(year, month, 1);
+            let startDay = firstDay.getDay() - 1;
+            if (startDay < 0) startDay = 6;
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            let html = '';
+            for (let i = 0; i < startDay; i++) {
+                html += '<div class="calendar-day empty"></div>';
+            }
+            for (let d = 1; d <= daysInMonth; d++) {
+                const date = new Date(year, month, d);
+                const isPast = date < today;
+                const isToday = date.getTime() === today.getTime();
+                const isSelected = selectedDate && date.getTime() === selectedDate.getTime();
+                let cls = 'calendar-day';
+                if (isPast) cls += ' disabled';
+                if (isToday) cls += ' today';
+                if (isSelected) cls += ' selected';
+                html += '<div class="' + cls + '" data-date="' + date.toISOString() + '">' + d + '</div>';
+            }
+            daysEl.innerHTML = html;
+
+            daysEl.querySelectorAll('.calendar-day:not(.disabled):not(.empty)').forEach(function(el) {
+                el.addEventListener('click', function() {
+                    selectedDate = new Date(this.dataset.date);
+                    renderCalendar();
+                });
+            });
+        }
+
+        window.changeMonth = function(dir) {
+            calendarDate.setMonth(calendarDate.getMonth() + dir);
+            const minDate = new Date(today.getFullYear(), today.getMonth(), 1);
+            if (calendarDate < minDate) calendarDate = new Date(minDate);
+            renderCalendar();
+        };
+
+        // Course Selection
+        document.querySelectorAll('.course-select-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.course-select-card').forEach(function(c) { c.classList.remove('selected'); });
+                this.classList.add('selected');
+                selectedCourse = this.dataset.course;
+            });
+        });
+
+        // Transmission Toggle
+        document.querySelectorAll('.transmission-toggle button').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.transmission-toggle button').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                selectedTransmission = this.dataset.type;
+                updatePrices();
+            });
+        });
+
+        function updatePrices() {
+            document.querySelectorAll('.course-select-card').forEach(function(card) {
+                var price = selectedTransmission === 'manual' ? card.dataset.priceManual : card.dataset.priceAuto;
+                var priceEl = card.querySelector('.dynamic-price');
+                if (priceEl) priceEl.textContent = Number(price).toLocaleString();
+            });
+        }
+
+        // Time Slots
+        document.querySelectorAll('.time-slot').forEach(function(slot) {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(function(s) { s.classList.remove('selected'); });
+                this.classList.add('selected');
+                selectedTime = this.dataset.time;
+            });
+        });
+
+        // Radio Options
+        function setupRadioOptions(containerId, callback) {
+            var container = document.getElementById(containerId);
+            if (!container) return;
+            container.querySelectorAll('.radio-option').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                    container.querySelectorAll('.radio-option').forEach(function(o) { o.classList.remove('selected'); });
+                    this.classList.add('selected');
+                    if (callback) callback(this.dataset.value);
+                });
+            });
+        }
+        setupRadioOptions('licenceOptions', function(v) { selectedLicence = v; });
+        setupRadioOptions('experienceOptions', function(v) { selectedExperience = v; });
+        setupRadioOptions('contactMethod', function(v) { selectedContact = v; });
+
+        // Step Navigation
+        window.nextStep = function(from) {
+            if (from === 1 && !selectedCourse) {
+                alert('Please select a course to continue.');
+                return;
+            }
+            if (from === 2) {
+                if (!selectedDate) { alert('Please select a date.'); return; }
+                if (!selectedTime) { alert('Please select a time slot.'); return; }
+            }
+            if (from === 3) {
+                var valid = true;
+                var name = document.getElementById('fullName');
+                var email = document.getElementById('email');
+                var phone = document.getElementById('phone');
+
+                [name, email, phone].forEach(function(el) { el.parentElement.classList.remove('error'); });
+
+                if (!name.value.trim()) { name.parentElement.classList.add('error'); valid = false; }
+                if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.parentElement.classList.add('error'); valid = false; }
+                if (!phone.value.trim() || phone.value.replace(/\D/g, '').length < 10) { phone.parentElement.classList.add('error'); valid = false; }
+                if (!selectedLicence) { alert('Please indicate if you have a provisional licence.'); valid = false; }
+                if (!valid) return;
+
+                populateSummary();
+            }
+            goToStep(from + 1);
+        };
+
+        window.prevStep = function(from) {
+            goToStep(from - 1);
+        };
+
+        function goToStep(step) {
+            currentStep = step;
+            document.querySelectorAll('.booking-step').forEach(function(s) { s.classList.remove('active'); });
+            var stepEl = document.getElementById('step' + step);
+            if (stepEl) stepEl.classList.add('active');
+
+            document.querySelectorAll('.progress-step').forEach(function(ps) {
+                var s = parseInt(ps.dataset.step);
+                ps.classList.remove('active', 'completed');
+                if (s === step) ps.classList.add('active');
+                else if (s < step) ps.classList.add('completed');
+            });
+            document.querySelectorAll('.step-connector').forEach(function(c, i) {
+                c.classList.toggle('completed', i < step - 1);
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function populateSummary() {
+            var card = document.querySelector('.course-select-card.selected');
+            var price = card ? (selectedTransmission === 'manual' ? card.dataset.priceManual : card.dataset.priceAuto) : '0';
+
+            document.getElementById('sumCourse').textContent = courseNames[selectedCourse] || '-';
+            document.getElementById('sumTransmission').textContent = selectedTransmission.charAt(0).toUpperCase() + selectedTransmission.slice(1);
+            document.getElementById('sumDate').textContent = selectedDate ? selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-';
+
+            var timeSlot = document.querySelector('.time-slot.selected');
+            document.getElementById('sumTime').textContent = timeSlot ? timeSlot.textContent : '-';
+
+            var instructor = document.getElementById('instructor');
+            document.getElementById('sumInstructor').textContent = instructor ? instructor.options[instructor.selectedIndex].text : '-';
+
+            var area = document.getElementById('pickupArea');
+            document.getElementById('sumArea').textContent = area && area.value ? area.value : 'To be confirmed';
+            document.getElementById('sumPrice').textContent = '£' + Number(price).toLocaleString();
+
+            document.getElementById('sumName').textContent = document.getElementById('fullName').value;
+            document.getElementById('sumEmail').textContent = document.getElementById('email').value;
+            document.getElementById('sumPhone').textContent = document.getElementById('phone').value;
+            document.getElementById('sumLicence').textContent = selectedLicence ? selectedLicence.charAt(0).toUpperCase() + selectedLicence.slice(1) : '-';
+            document.getElementById('sumExperience').textContent = selectedExperience ? selectedExperience.charAt(0).toUpperCase() + selectedExperience.slice(1) : '-';
+            document.getElementById('sumContact').textContent = selectedContact ? selectedContact.charAt(0).toUpperCase() + selectedContact.slice(1) : '-';
+        }
+
+        // Confirm Booking
+        window.confirmBooking = function() {
+            var terms = document.getElementById('termsCheck');
+            if (!terms || !terms.checked) {
+                alert('Please agree to the terms and conditions to continue.');
+                return;
+            }
+            var ref = 'IMP-' + (Math.floor(Math.random() * 90000) + 10000);
+            document.getElementById('bookingRef').textContent = ref;
+            document.getElementById('successModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Close modal on overlay click
+        var modal = document.getElementById('successModal');
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // Init calendar
+        renderCalendar();
+    })();
+    </script>
+</body>
+</html>
