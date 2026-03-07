@@ -1441,7 +1441,7 @@ iframe {
 }
 
 .faq-item.active .faq-answer {
-    max-height: 300px;
+    max-height: 500px;
 }
 
 .faq-answer p {
@@ -1925,4 +1925,193 @@ iframe {
     .nav-actions .btn {
         display: inline-flex;
     }
+}
+
+/* ============================================
+   SUB-PAGE STYLES
+   ============================================ */
+
+/* ----- Page Hero (sub-pages) ----- */
+.page-hero {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, #0f3460 100%);
+    padding: 140px 0 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(26,115,232,0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 50%, rgba(0,201,167,0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.page-hero h1 {
+    font-family: var(--ff-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+}
+
+.page-hero p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ----- Breadcrumb ----- */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+}
+
+.breadcrumb a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: var(--white);
+}
+
+.breadcrumb i {
+    font-size: 0.7rem;
+}
+
+.breadcrumb span {
+    color: var(--white);
+    font-weight: 500;
+}
+
+/* ----- About Page: Our Story ----- */
+.our-story {
+    padding: var(--space-xxl) 0;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.story-content h2 {
+    font-family: var(--ff-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+.story-content p {
+    color: var(--gray-600);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.story-timeline h3 {
+    font-family: var(--ff-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+/* ----- Timeline ----- */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    border-radius: 3px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.55rem;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 3px var(--primary);
+}
+
+.timeline-year {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.timeline-content h4 {
+    font-family: var(--ff-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+}
+
+.timeline-content p {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    line-height: 1.5;
+}
+
+/* ----- Mission & Values ----- */
+.mission-values {
+    padding: var(--space-xxl) 0;
+    background: var(--light);
+}
+
+/* ----- Instructor Bio ----- */
+.instructor-bio {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    line-height: 1.5;
+    margin-top: 0.75rem;
+}
+
+/* ----- AOS delay extensions ----- */
+[data-aos-delay="600"] { transition-delay: 0.6s; }
+[data-aos-delay="700"] { transition-delay: 0.7s; }
+[data-aos-delay="800"] { transition-delay: 0.8s; }
+
+/* ----- Sub-page responsive ----- */
+@media (max-width: 768px) {
+    .page-hero { padding: 120px 0 40px; }
+    .page-hero h1 { font-size: 1.8rem; }
+    .story-grid { grid-template-columns: 1fr; }
 }

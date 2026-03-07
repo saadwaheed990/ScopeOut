@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function hidePreloader() {
     if (preloader) {
-      preloader.classList.add('hidden');
+      preloader.classList.add('loaded');
     }
   }
 
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     hidePreloader();
   } else {
     window.addEventListener('load', hidePreloader);
+    setTimeout(hidePreloader, 5000);
   }
 
   // =========================================================================
@@ -277,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
           otherItem.classList.remove('active');
           var otherAnswer = otherItem.querySelector('.faq-answer');
           if (otherAnswer) {
-            otherAnswer.style.maxHeight = null;
+            otherAnswer.style.maxHeight = '0px';
           }
         }
       });
@@ -288,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!isActive) {
         answer.style.maxHeight = answer.scrollHeight + 'px';
       } else {
-        answer.style.maxHeight = null;
+        answer.style.maxHeight = '0px';
       }
     });
   });
