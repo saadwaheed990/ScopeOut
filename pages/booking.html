@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book your driving lessons online with Impulse Driving School Manchester. Real-time booking, flexible scheduling, manual & automatic lessons available.">
+    <meta name="keywords" content="book driving lessons Manchester, driving lesson booking, intensive course booking, Impulse Driving School booking">
+    <meta property="og:title" content="Book Your Driving Lessons | Impulse Driving School Manchester">
+    <meta property="og:description" content="Book driving lessons online with Impulse Driving School. Real-time booking, flexible scheduling, manual & automatic lessons.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://impulsedrive.co.uk/pages/booking.html">
+    <title>Book Your Driving Lessons | Impulse Driving School Manchester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/booking.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Book Driving Lessons - Impulse Driving School",
+        "description": "Book your driving lessons online with Impulse Driving School Manchester.",
+        "provider": {
+            "@type": "DrivingSchool",
+            "name": "Impulse Driving School",
+            "url": "https://impulsedrive.co.uk"
+        }
+    }
+    </script>
+    <!-- Styles in css/booking.css -->
+    <!--
+        /* ============================================
+           BOOKING PAGE STYLES
+           ============================================ */
+
+        .booking-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 140px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 123, 255, 0.15) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 50%, rgba(0, 200, 150, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .booking-hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .booking-hero p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ---- Progress Bar ---- */
+        .progress-bar-section {
+            background: #fff;
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 70px;
+            z-index: 90;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #868e96;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            border: 3px solid #e9ecef;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .step-circle i {
+            display: none;
+            font-size: 1rem;
+        }
+
+        .progress-step.active .step-circle {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            box-shadow: 0 0 0 6px rgba(0,123,255,0.15);
+        }
+
+        .progress-step.completed .step-circle {
+            background: #28a745;
+            color: #fff;
+            border-color: #28a745;
+        }
+
+        .progress-step.completed .step-circle .step-num {
+            display: none;
+        }
+
+        .progress-step.completed .step-circle i {
+            display: block;
+        }
+
+        .step-label {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #adb5bd;
+            text-align: center;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .progress-step.active .step-label,
+        .progress-step.completed .step-label {
+            color: #212529;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 22px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 3px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            background: #28a745;
+            transition: width 0.5s ease;
+            width: 0%;
+            border-radius: 3px;
+        }
+
+        /* ---- Booking Form Container ---- */
+        .booking-section {
+            padding: 3rem 0 5rem;
+            background: #f8f9fa;
+            min-height: 60vh;
+        }
+
+        .booking-form-container {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .booking-step {
+            display: none;
+            animation: fadeInStep 0.4s ease;
+        }
+
+        .booking-step.active {
+            display: block;
+        }
+
+        @keyframes fadeInStep {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 0.4rem;
+        }
+
+        .step-subtitle {
+            color: #6c757d;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* ---- Transmission Toggle ---- */
+        .transmission-toggle {
+            display: flex;
+            gap: 0;
+            background: #e9ecef;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 2rem;
+            max-width: 320px;
+        }
+
+        .transmission-toggle label {
+            flex: 1;
+            text-align: center;
+            padding: 0.7rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+
+        .transmission-toggle input[type="radio"] {
+            display: none;
+        }
+
+        .transmission-toggle input[type="radio"]:checked + label {
+            background: #007bff;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+        }
+
+        /* ---- Course Cards ---- */
+        .course-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .course-radio-card {
+            position: relative;
+        }
+
+        .course-radio-card input[type="radio"] {
+            display: none;
+        }
+
+        .course-card-label {
+            display: block;
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 14px;
+            padding: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .course-card-label:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 16px rgba(0,123,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .course-radio-card input:checked + .course-card-label {
+            border-color: #007bff;
+            background: linear-gradient(135deg, rgba(0,123,255,0.04), rgba(0,123,255,0.08));
+            box-shadow: 0 4px 20px rgba(0,123,255,0.15);
+        }
+
+        .course-radio-card input:checked + .course-card-label::after {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #007bff;
+            font-size: 1.3rem;
+        }
+
+        .course-card-label .course-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 0.4rem;
+        }
+
+        .course-card-label .course-price-tag {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #007bff;
+            margin-bottom: 0.3rem;
+        }
+
+        .course-card-label .course-desc {
+            font-size: 0.82rem;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        .course-card-label .course-badge-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-card-label .course-badge-tag.popular {
+            background: linear-gradient(135deg, #ff6b35, #e63946);
+        }
+
+        .course-card-label .course-badge-tag.premium {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        /* ---- Calendar Widget ---- */
+        .calendar-widget {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .calendar-header h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar-nav button {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: #495057;
+        }
+
+        .calendar-nav button:hover {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .calendar-nav button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .calendar-nav button:disabled:hover {
+            background: #fff;
+            color: #495057;
+            border-color: #dee2e6;
+        }
+
+        .calendar-days-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-days-header span {
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #adb5bd;
+            padding: 0.4rem 0;
+            text-transform: uppercase;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            color: #212529;
+            position: relative;
+        }
+
+        .calendar-day:hover:not(.disabled):not(.empty) {
+            background: rgba(0,123,255,0.1);
+        }
+
+        .calendar-day.today {
+            border: 2px solid #007bff;
+            font-weight: 700;
+        }
+
+        .calendar-day.available {
+            background: rgba(40,167,69,0.08);
+            color: #155724;
+        }
+
+        .calendar-day.available:hover {
+            background: rgba(40,167,69,0.18);
+        }
+
+        .calendar-day.selected {
+            background: #007bff !important;
+            color: #fff !important;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(0,123,255,0.3);
+        }
+
+        .calendar-day.disabled {
+            color: #dee2e6;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .calendar-day.empty {
+            cursor: default;
+        }
+
+        /* ---- Time Slots ---- */
+        .time-slots-section {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .time-slots-section h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .time-period {
+            margin-bottom: 1.2rem;
+        }
+
+        .time-period-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .time-slots-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .time-slot {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #495057;
+            transition: all 0.2s ease;
+        }
+
+        .time-slot:hover {
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .time-slot.active {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            box-shadow: 0 2px 10px rgba(0,123,255,0.3);
+        }
+
+        /* ---- Instructor & Area ---- */
+        .preference-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ---- Form Inputs ---- */
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a1a2e;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group label .required {
+            color: #e63946;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: #212529;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 4px rgba(0,123,255,0.1);
+        }
+
+        .form-input.error {
+            border-color: #e63946;
+            box-shadow: 0 0 0 4px rgba(230,57,70,0.1);
+        }
+
+        .form-input::placeholder {
+            color: #adb5bd;
+        }
+
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236c757d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .error-msg {
+            color: #e63946;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-group.has-error .error-msg {
+            display: block;
+        }
+
+        .form-group.has-error .form-input {
+            border-color: #e63946;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* ---- Radio Group Inline ---- */
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            font-size: 0.92rem;
+            color: #495057;
+        }
+
+        .radio-option input[type="radio"] {
+            accent-color: #007bff;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ---- Nav Buttons ---- */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-step {
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-next {
+            background: #007bff;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(0,123,255,0.3);
+        }
+
+        .btn-next:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,123,255,0.35);
+        }
+
+        .btn-back {
+            background: #fff;
+            color: #495057;
+            border: 2px solid #dee2e6;
+        }
+
+        .btn-back:hover {
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        /* ---- Summary Card ---- */
+        .summary-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card-header {
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: #fff;
+            padding: 1.4rem 1.8rem;
+        }
+
+        .summary-card-header h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .summary-card-body {
+            padding: 1.8rem;
+        }
+
+        .summary-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-group-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #007bff;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f3f5;
+            font-size: 0.92rem;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .summary-value {
+            color: #212529;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.8rem;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+            font-size: 1.15rem;
+        }
+
+        .summary-total .summary-label {
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .summary-total .summary-value {
+            font-weight: 800;
+            color: #007bff;
+            font-size: 1.3rem;
+        }
+
+        /* ---- Terms ---- */
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .terms-check.has-error {
+            border-color: #e63946;
+            background: rgba(230,57,70,0.03);
+        }
+
+        .terms-check input[type="checkbox"] {
+            accent-color: #007bff;
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .terms-check label {
+            font-size: 0.9rem;
+            color: #495057;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .terms-check label a {
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 20px rgba(0,123,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(0,123,255,0.4);
+        }
+
+        .confirmation-note {
+            text-align: center;
+            margin-top: 1.2rem;
+            color: #6c757d;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .confirmation-note i {
+            color: #28a745;
+            margin-right: 0.3rem;
+        }
+
+        /* ---- Success Modal ---- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .success-modal {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            padding: 3rem 2.5rem;
+            position: relative;
+            animation: modalSlideUp 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: checkPop 0.6s ease 0.2s both;
+        }
+
+        @keyframes checkPop {
+            0% { transform: scale(0); }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .success-checkmark i {
+            font-size: 2.2rem;
+            color: #fff;
+        }
+
+        .success-modal h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-modal .ref-number {
+            font-size: 1.1rem;
+            color: #007bff;
+            font-weight: 700;
+            background: rgba(0,123,255,0.08);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-modal .next-steps {
+            text-align: left;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-modal .next-steps h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 0.8rem;
+        }
+
+        .success-modal .next-steps ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .success-modal .next-steps li {
+            font-size: 0.88rem;
+            color: #495057;
+            padding: 0.35rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .success-modal .next-steps li i {
+            color: #28a745;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .success-modal .contact-urgent {
+            font-size: 0.92rem;
+            color: #495057;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-modal .contact-urgent strong {
+            color: #1a1a2e;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-actions .btn-wa {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #25d366;
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .modal-actions .btn-wa:hover {
+            background: #1da851;
+            transform: translateY(-1px);
+        }
+
+        .modal-actions .btn-close-modal {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: #f8f9fa;
+            color: #495057;
+            border: 2px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-actions .btn-close-modal:hover {
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 768px) {
+            .booking-hero { padding: 120px 0 40px; }
+            .booking-hero h1 { font-size: 2rem; }
+
+            .step-label { font-size: 0.7rem; }
+            .step-circle { width: 36px; height: 36px; font-size: 0.85rem; }
+
+            .course-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row,
+            .preference-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .step-nav {
+                flex-direction: column-reverse;
+                gap: 1rem;
+            }
+
+            .btn-step { width: 100%; justify-content: center; }
+
+            .success-modal { padding: 2rem 1.5rem; }
+
+            .progress-steps {
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .booking-hero h1 { font-size: 1.6rem; }
+            .calendar-day { font-size: 0.8rem; }
+        }
+    -->
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="steering-wheel">
+                <i class="fas fa-dharmachakra"></i>
+            </div>
+            <p>Impulse Drive</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon"><i class="fas fa-car-side"></i></span>
+                <span class="logo-text">Impulse<span class="logo-accent">Drive</span></span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="areas.html">Areas</a>
+                <a href="contact.html">Contact</a>
+                <a href="booking.html" class="nav-cta active">Book Now</a>
+            </div>
+            <div class="nav-actions">
+                <a href="tel:07368543368" class="nav-phone"><i class="fas fa-phone"></i> 07368 543 368</a>
+                <a href="booking.html" class="btn btn-primary btn-sm">Book Now</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="booking-hero">
+        <div class="container">
+            <h1><i class="fas fa-calendar-check"></i> Book Your Driving Lessons Online</h1>
+            <p>Choose your course, pick a date, and we'll get you on the road. It only takes a few minutes.</p>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-section">
+        <div class="container">
+            <div class="progress-steps">
+                <div class="progress-line">
+                    <div class="progress-line-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle"><span class="step-num">1</span><i class="fas fa-check"></i></div>
+                    <span class="step-label">Select Course</span>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle"><span class="step-num">2</span><i class="fas fa-check"></i></div>
+                    <span class="step-label">Date &amp; Time</span>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle"><span class="step-num">3</span><i class="fas fa-check"></i></div>
+                    <span class="step-label">Your Details</span>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-circle"><span class="step-num">4</span><i class="fas fa-check"></i></div>
+                    <span class="step-label">Confirmation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-form-container">
+
+                <!-- STEP 1: Course Selection -->
+                <div class="booking-step active" id="step1">
+                    <h2 class="step-title"><i class="fas fa-graduation-cap"></i> Select Your Course</h2>
+                    <p class="step-subtitle">Choose a course that fits your goals and budget.</p>
+
+                    <div class="transmission-toggle">
+                        <input type="radio" name="transmission" id="transManual" value="Manual" checked>
+                        <label for="transManual"><i class="fas fa-gear"></i> Manual</label>
+                        <input type="radio" name="transmission" id="transAuto" value="Automatic">
+                        <label for="transAuto"><i class="fas fa-a"></i> Automatic</label>
+                    </div>
+
+                    <div class="course-cards-grid">
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="coursePayg" value="payg">
+                            <label for="coursePayg" class="course-card-label">
+                                <span class="course-badge-tag popular">Most Popular</span>
+                                <div class="course-name">Pay As You Go</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;72</span> <small>/ session</small></div>
+                                <div class="course-desc">Flexible 2-hour lessons. No commitment, pay per session. Manual &pound;72 / Auto &pound;74.</div>
+                            </label>
+                        </div>
+
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="courseBlock" value="block">
+                            <label for="courseBlock" class="course-card-label">
+                                <span class="course-badge-tag">Save 10%</span>
+                                <div class="course-name">Block Booking 10hrs</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;330&ndash;&pound;340</span></div>
+                                <div class="course-desc">10 hours of structured lessons. Manual &pound;330&ndash;&pound;340 / Auto &pound;330&ndash;&pound;350.</div>
+                            </label>
+                        </div>
+
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="courseInt6" value="intensive6">
+                            <label for="courseInt6" class="course-card-label">
+                                <div class="course-name">Intensive 6hr</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;465</span></div>
+                                <div class="course-desc">Quick crash course covering all fundamentals. Ideal for those with some experience.</div>
+                            </label>
+                        </div>
+
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="courseInt10" value="intensive10">
+                            <label for="courseInt10" class="course-card-label">
+                                <div class="course-name">Intensive 10hr</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;695</span></div>
+                                <div class="course-desc">Focused 10-hour programme. Get test-ready in about a week.</div>
+                            </label>
+                        </div>
+
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="courseInt20" value="intensive20">
+                            <label for="courseInt20" class="course-card-label">
+                                <span class="course-badge-tag popular">Best Value</span>
+                                <div class="course-name">Intensive 20hr</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;1,295</span></div>
+                                <div class="course-desc">Comprehensive 20-hour course. Most popular for complete beginners.</div>
+                            </label>
+                        </div>
+
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="courseInt30" value="intensive30">
+                            <label for="courseInt30" class="course-card-label">
+                                <div class="course-name">Intensive 30hr</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;1,695</span></div>
+                                <div class="course-desc">In-depth 30-hour programme. Full preparation with thorough route practice.</div>
+                            </label>
+                        </div>
+
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="courseInt40" value="intensive40">
+                            <label for="courseInt40" class="course-card-label">
+                                <div class="course-name">Intensive 40hr</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;1,895</span></div>
+                                <div class="course-desc">Extended 40-hour programme. Maximum practice, maximum confidence.</div>
+                            </label>
+                        </div>
+
+                        <div class="course-radio-card">
+                            <input type="radio" name="course" id="courseGuaranteed" value="guaranteed">
+                            <label for="courseGuaranteed" class="course-card-label">
+                                <span class="course-badge-tag premium">Premium</span>
+                                <div class="course-name">Guaranteed Pass</div>
+                                <div class="course-price-tag"><span class="dynamic-price">&pound;2,995</span></div>
+                                <div class="course-desc">Unlimited lessons until you pass. 3 free test attempts. Total peace of mind.</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="step-nav">
+                        <div></div>
+                        <button class="btn-step btn-next" onclick="nextStep(1)">
+                            Choose Date &amp; Time <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Date & Time -->
+                <div class="booking-step" id="step2">
+                    <h2 class="step-title"><i class="fas fa-calendar-alt"></i> Choose Date &amp; Time</h2>
+                    <p class="step-subtitle">Select your preferred start date and time slot.</p>
+
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <h3 id="calendarTitle">March 2026</h3>
+                            <div class="calendar-nav">
+                                <button id="calPrev" aria-label="Previous month"><i class="fas fa-chevron-left"></i></button>
+                                <button id="calNext" aria-label="Next month"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="calendar-days-header">
+                            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid"></div>
+                    </div>
+
+                    <div class="time-slots-section" id="timeSlotsSection">
+                        <h3><i class="fas fa-clock"></i> Select a Time Slot</h3>
+                        <div class="time-period">
+                            <div class="time-period-label"><i class="fas fa-sun"></i> Morning</div>
+                            <div class="time-slots-grid">
+                                <button class="time-slot" data-time="08:00">8:00</button>
+                                <button class="time-slot" data-time="09:00">9:00</button>
+                                <button class="time-slot" data-time="10:00">10:00</button>
+                                <button class="time-slot" data-time="11:00">11:00</button>
+                            </div>
+                        </div>
+                        <div class="time-period">
+                            <div class="time-period-label"><i class="fas fa-cloud-sun"></i> Afternoon</div>
+                            <div class="time-slots-grid">
+                                <button class="time-slot" data-time="12:00">12:00</button>
+                                <button class="time-slot" data-time="13:00">13:00</button>
+                                <button class="time-slot" data-time="14:00">14:00</button>
+                                <button class="time-slot" data-time="15:00">15:00</button>
+                            </div>
+                        </div>
+                        <div class="time-period">
+                            <div class="time-period-label"><i class="fas fa-moon"></i> Evening</div>
+                            <div class="time-slots-grid">
+                                <button class="time-slot" data-time="16:00">16:00</button>
+                                <button class="time-slot" data-time="17:00">17:00</button>
+                                <button class="time-slot" data-time="18:00">18:00</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="preference-row">
+                        <div class="form-group">
+                            <label for="instructor">Preferred Instructor</label>
+                            <select id="instructor" class="form-input">
+                                <option value="No preference">No preference</option>
+                                <option value="Asad">Asad</option>
+                                <option value="Martin">Martin</option>
+                                <option value="Bahjat">Bahjat</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickupArea">Preferred Area / Pickup Location</label>
+                            <input type="text" id="pickupArea" class="form-input" placeholder="e.g. Didsbury, Rusholme...">
+                        </div>
+                    </div>
+
+                    <div class="step-nav">
+                        <button class="btn-step btn-back" onclick="prevStep(2)">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button class="btn-step btn-next" onclick="nextStep(2)">
+                            Your Details <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Personal Details -->
+                <div class="booking-step" id="step3">
+                    <h2 class="step-title"><i class="fas fa-user"></i> Your Details</h2>
+                    <p class="step-subtitle">Tell us a bit about yourself so we can best serve you.</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" class="form-input" placeholder="John Smith" required>
+                            <div class="error-msg">Please enter your full name.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                            <div class="error-msg">Please enter a valid email address.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" class="form-input" placeholder="07XXX XXX XXX" required>
+                            <div class="error-msg">Please enter a valid UK phone number.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Do you have a provisional licence? <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="licence" value="Yes"> Yes
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="licence" value="No"> No
+                                </label>
+                            </div>
+                            <div class="error-msg">Please select an option.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Previous Driving Experience</label>
+                            <select id="experience" class="form-input">
+                                <option value="None">None - Complete Beginner</option>
+                                <option value="Some">Some - A few lessons before</option>
+                                <option value="Significant">Significant - Many lessons / drove abroad</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Special Requirements / Notes</label>
+                        <textarea id="notes" class="form-input" placeholder="Any special requirements, questions, or preferences..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Contact Method</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="contactMethod" value="Phone" checked> <i class="fas fa-phone"></i> Phone
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contactMethod" value="Email"> <i class="fas fa-envelope"></i> Email
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contactMethod" value="WhatsApp"> <i class="fab fa-whatsapp"></i> WhatsApp
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="step-nav">
+                        <button class="btn-step btn-back" onclick="prevStep(3)">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button class="btn-step btn-next" onclick="nextStep(3)">
+                            Review Booking <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Confirmation -->
+                <div class="booking-step" id="step4">
+                    <h2 class="step-title"><i class="fas fa-clipboard-check"></i> Review &amp; Confirm</h2>
+                    <p class="step-subtitle">Please review your booking details before confirming.</p>
+
+                    <div class="summary-card">
+                        <div class="summary-card-header">
+                            <h3><i class="fas fa-file-invoice"></i> Booking Summary</h3>
+                        </div>
+                        <div class="summary-card-body">
+                            <div class="summary-group">
+                                <div class="summary-group-title"><i class="fas fa-graduation-cap"></i> Course Details</div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Course</span>
+                                    <span class="summary-value" id="sumCourse">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Transmission</span>
+                                    <span class="summary-value" id="sumTransmission">&mdash;</span>
+                                </div>
+                            </div>
+                            <div class="summary-group">
+                                <div class="summary-group-title"><i class="fas fa-calendar"></i> Schedule</div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Date</span>
+                                    <span class="summary-value" id="sumDate">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Time</span>
+                                    <span class="summary-value" id="sumTime">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Instructor</span>
+                                    <span class="summary-value" id="sumInstructor">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Pickup Area</span>
+                                    <span class="summary-value" id="sumArea">&mdash;</span>
+                                </div>
+                            </div>
+                            <div class="summary-group">
+                                <div class="summary-group-title"><i class="fas fa-user"></i> Personal Details</div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Name</span>
+                                    <span class="summary-value" id="sumName">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Email</span>
+                                    <span class="summary-value" id="sumEmail">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Phone</span>
+                                    <span class="summary-value" id="sumPhone">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Provisional Licence</span>
+                                    <span class="summary-value" id="sumLicence">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Experience</span>
+                                    <span class="summary-value" id="sumExperience">&mdash;</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Contact Preference</span>
+                                    <span class="summary-value" id="sumContact">&mdash;</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="summary-total">
+                            <span class="summary-label">Total Price</span>
+                            <span class="summary-value" id="sumPrice">&mdash;</span>
+                        </div>
+                    </div>
+
+                    <div class="terms-check" id="termsWrap">
+                        <input type="checkbox" id="termsAgree">
+                        <label for="termsAgree">I agree to the <a href="#">terms and conditions</a> and acknowledge that a member of the team will contact me to confirm the booking and arrange payment.</label>
+                    </div>
+
+                    <button class="btn-confirm" id="btnConfirm" onclick="confirmBooking()">
+                        <i class="fas fa-check-circle"></i> Confirm Booking
+                    </button>
+
+                    <p class="confirmation-note">
+                        <i class="fas fa-info-circle"></i> A member of our team will contact you within 2 hours to confirm your booking and arrange payment.
+                    </p>
+
+                    <div class="step-nav" style="border-top: none; margin-top: 1rem;">
+                        <button class="btn-step btn-back" onclick="prevStep(4)">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <div></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="success-modal">
+            <div class="success-checkmark">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2>Booking Request Submitted!</h2>
+            <div class="ref-number" id="refNumber">IMP-00000</div>
+            <div class="next-steps">
+                <h4>What happens next?</h4>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Your booking request has been received</li>
+                    <li><i class="fas fa-phone-alt"></i> We'll call you within 2 hours to confirm</li>
+                    <li><i class="fas fa-credit-card"></i> Payment will be arranged during confirmation</li>
+                    <li><i class="fas fa-car"></i> Your instructor will pick you up from your door</li>
+                </ul>
+            </div>
+            <p class="contact-urgent">
+                Need to reach us sooner? <strong>Call 07368 543 368</strong> or message us on WhatsApp.
+            </p>
+            <div class="modal-actions">
+                <a href="https://wa.me/447368543368" target="_blank" rel="noopener" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                </a>
+                <button class="btn-close-modal" onclick="closeModal()">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon"><i class="fas fa-car-side"></i></span>
+                        <span class="logo-text">Impulse<span class="logo-accent">Drive</span></span>
+                    </a>
+                    <p>Manchester's premier driving school with a 93% first-time pass rate. Building safe, confident drivers since 2017.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/ImpulseDriveUK/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/impulsedrive/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@ImpulseDrive" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@impulsedrive" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="pricing.html">Pricing</a>
+                    <a href="areas.html">Areas Covered</a>
+                    <a href="booking.html">Book Now</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Our Courses</h4>
+                    <a href="pricing.html">Pay As You Go</a>
+                    <a href="pricing.html">Intensive Courses</a>
+                    <a href="pricing.html">Block Bookings</a>
+                    <a href="pricing.html">Guaranteed Pass</a>
+                    <a href="pricing.html">Automatic Lessons</a>
+                    <a href="pricing.html">Refresher Courses</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <a href="tel:07368543368">07368 543 368</a>
+                            <a href="tel:01614920547">0161 492 0547</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@impulsedrive.co.uk">info@impulsedrive.co.uk</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Spaces, Oxford St,<br>Manchester, M1 5AN</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/447368543368">WhatsApp Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Impulse Driving School. All rights reserved. | Impulse Private Ltd is an Introducer Appointed Representative of Social Money Limited (Payl8r), authorised and regulated by the Financial Conduct Authority.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/447368543368" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/booking.js"></script>
+    <!-- Inline booking JS extracted to js/booking.js -->
+    <!--
+    (function() {
+        'use strict';
+        var currentStep = 1;
+        var selectedDate = null;
+        var selectedTime = null;
+        var calendarMonth = new Date().getMonth();
+        var calendarYear = new Date().getFullYear();
+
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        var maxDate = new Date(today);
+        maxDate.setDate(maxDate.getDate() + 60);
+
+        var monthNames = ['January','February','March','April','May','June',
+                          'July','August','September','October','November','December'];
+
+        // ---- Course price data ----
+        var courseData = {
+            payg:        { name: 'Pay As You Go',       manual: 72,   auto: 74 },
+            block:       { name: 'Block Booking 10hrs', manual: 335,  auto: 340 },
+            intensive6:  { name: 'Intensive 6hr',       manual: 465,  auto: 465 },
+            intensive10: { name: 'Intensive 10hr',      manual: 695,  auto: 695 },
+            intensive20: { name: 'Intensive 20hr',      manual: 1295, auto: 1295 },
+            intensive30: { name: 'Intensive 30hr',      manual: 1695, auto: 1695 },
+            intensive40: { name: 'Intensive 40hr',      manual: 1895, auto: 1895 },
+            guaranteed:  { name: 'Guaranteed Pass',     manual: 2995, auto: 2995 }
+        };
+
+        // ---- Transmission Toggle: update displayed prices ----
+        var transmissionRadios = document.querySelectorAll('input[name="transmission"]');
+        for (var t = 0; t < transmissionRadios.length; t++) {
+            transmissionRadios[t].addEventListener('change', updateDisplayedPrices);
+        }
+
+        function getTransmission() {
+            var checked = document.querySelector('input[name="transmission"]:checked');
+            return checked ? checked.value : 'Manual';
+        }
+
+        function updateDisplayedPrices() {
+            var trans = getTransmission();
+            var isManual = (trans === 'Manual');
+            var cards = document.querySelectorAll('.course-radio-card');
+            for (var c = 0; c < cards.length; c++) {
+                var card = cards[c];
+                var input = card.querySelector('input[type="radio"]');
+                var val = input.value;
+                var data = courseData[val];
+                if (!data) continue;
+                var price = isManual ? data.manual : data.auto;
+                var priceEl = card.querySelector('.dynamic-price');
+                if (priceEl) {
+                    if (val === 'payg') {
+                        priceEl.textContent = '\u00A3' + price;
+                    } else if (val === 'block') {
+                        priceEl.textContent = isManual ? '\u00A3330\u2013\u00A3340' : '\u00A3330\u2013\u00A3350';
+                    } else {
+                        priceEl.textContent = '\u00A3' + price.toLocaleString();
+                    }
+                }
+            }
+        }
+
+        // ---- Calendar ----
+        function renderCalendar() {
+            var grid = document.getElementById('calendarGrid');
+            var title = document.getElementById('calendarTitle');
+            grid.innerHTML = '';
+            title.textContent = monthNames[calendarMonth] + ' ' + calendarYear;
+
+            // Disable prev if at or before current month
+            var prevBtn = document.getElementById('calPrev');
+            if (calendarYear === today.getFullYear() && calendarMonth <= today.getMonth()) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+
+            // Disable next if past max date month
+            var nextBtn = document.getElementById('calNext');
+            if (calendarYear > maxDate.getFullYear() ||
+                (calendarYear === maxDate.getFullYear() && calendarMonth >= maxDate.getMonth())) {
+                nextBtn.disabled = true;
+            } else {
+                nextBtn.disabled = false;
+            }
+
+            var firstDay = new Date(calendarYear, calendarMonth, 1);
+            var startDay = firstDay.getDay(); // 0=Sun
+            // Convert to Monday-start: Mon=0 ... Sun=6
+            startDay = (startDay === 0) ? 6 : startDay - 1;
+
+            var daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+
+            // Empty cells before first day
+            for (var e = 0; e < startDay; e++) {
+                var empty = document.createElement('div');
+                empty.className = 'calendar-day empty';
+                grid.appendChild(empty);
+            }
+
+            for (var d = 1; d <= daysInMonth; d++) {
+                var cell = document.createElement('button');
+                cell.type = 'button';
+                cell.className = 'calendar-day';
+                cell.textContent = d;
+
+                var cellDate = new Date(calendarYear, calendarMonth, d);
+                cellDate.setHours(0, 0, 0, 0);
+
+                if (cellDate < today) {
+                    cell.classList.add('disabled');
+                } else if (cellDate > maxDate) {
+                    cell.classList.add('disabled');
+                } else {
+                    cell.classList.add('available');
+                    cell.setAttribute('data-date', cellDate.toISOString().split('T')[0]);
+                    (function(btn) {
+                        btn.addEventListener('click', function() {
+                            selectDate(btn);
+                        });
+                    })(cell);
+                }
+
+                if (cellDate.getTime() === today.getTime()) {
+                    cell.classList.add('today');
+                }
+
+                if (selectedDate && cellDate.toISOString().split('T')[0] === selectedDate) {
+                    cell.classList.add('selected');
+                }
+
+                grid.appendChild(cell);
+            }
+        }
+
+        function selectDate(el) {
+            var allSelected = document.querySelectorAll('.calendar-day.selected');
+            for (var i = 0; i < allSelected.length; i++) {
+                allSelected[i].classList.remove('selected');
+            }
+            el.classList.add('selected');
+            selectedDate = el.getAttribute('data-date');
+        }
+
+        document.getElementById('calPrev').addEventListener('click', function() {
+            calendarMonth--;
+            if (calendarMonth < 0) {
+                calendarMonth = 11;
+                calendarYear--;
+            }
+            renderCalendar();
+        });
+
+        document.getElementById('calNext').addEventListener('click', function() {
+            calendarMonth++;
+            if (calendarMonth > 11) {
+                calendarMonth = 0;
+                calendarYear++;
+            }
+            renderCalendar();
+        });
+
+        // Initialize calendar
+        renderCalendar();
+
+        // ---- Time Slots ----
+        var timeSlots = document.querySelectorAll('.time-slot');
+        for (var s = 0; s < timeSlots.length; s++) {
+            (function(slot) {
+                slot.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var allActive = document.querySelectorAll('.time-slot.active');
+                    for (var j = 0; j < allActive.length; j++) {
+                        allActive[j].classList.remove('active');
+                    }
+                    slot.classList.add('active');
+                    selectedTime = slot.getAttribute('data-time');
+                });
+            })(timeSlots[s]);
+        }
+
+        // ---- Step Navigation ----
+        window.nextStep = function(fromStep) {
+            if (!validateStep(fromStep)) return;
+
+            if (fromStep === 3) {
+                generateSummary();
+            }
+
+            currentStep = fromStep + 1;
+            showStep(currentStep);
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.prevStep = function(fromStep) {
+            currentStep = fromStep - 1;
+            showStep(currentStep);
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        function showStep(step) {
+            var allSteps = document.querySelectorAll('.booking-step');
+            for (var i = 0; i < allSteps.length; i++) {
+                allSteps[i].classList.remove('active');
+            }
+            var el = document.getElementById('step' + step);
+            if (el) {
+                el.style.animation = 'none';
+                el.offsetHeight; // trigger reflow
+                el.style.animation = '';
+                el.classList.add('active');
+            }
+        }
+
+        function updateProgress() {
+            var steps = document.querySelectorAll('.progress-step');
+            for (var i = 0; i < steps.length; i++) {
+                var stepNum = parseInt(steps[i].getAttribute('data-step'));
+                steps[i].classList.remove('active', 'completed');
+                if (stepNum < currentStep) {
+                    steps[i].classList.add('completed');
+                } else if (stepNum === currentStep) {
+                    steps[i].classList.add('active');
+                }
+            }
+
+            // Progress line fill
+            var fill = document.getElementById('progressFill');
+            var pct = ((currentStep - 1) / 3) * 100;
+            fill.style.width = pct + '%';
+        }
+
+        // ---- Validation ----
+        function validateStep(step) {
+            clearErrors();
+
+            if (step === 1) {
+                var course = document.querySelector('input[name="course"]:checked');
+                if (!course) {
+                    alert('Please select a course to continue.');
+                    return false;
+                }
+                return true;
+            }
+
+            if (step === 2) {
+                if (!selectedDate) {
+                    alert('Please select a date on the calendar.');
+                    return false;
+                }
+                if (!selectedTime) {
+                    alert('Please select a time slot.');
+                    return false;
+                }
+                return true;
+            }
+
+            if (step === 3) {
+                var valid = true;
+
+                var nameField = document.getElementById('fullName');
+                if (!nameField.value.trim()) {
+                    setError(nameField);
+                    valid = false;
+                }
+
+                var emailField = document.getElementById('email');
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailField.value.trim() || !emailPattern.test(emailField.value.trim())) {
+                    setError(emailField);
+                    valid = false;
+                }
+
+                var phoneField = document.getElementById('phone');
+                var phoneVal = phoneField.value.replace(/\s+/g, '');
+                var phonePattern = /^(\+44|0)7\d{9}$/;
+                if (!phoneVal || !phonePattern.test(phoneVal)) {
+                    setError(phoneField);
+                    valid = false;
+                }
+
+                var licence = document.querySelector('input[name="licence"]:checked');
+                if (!licence) {
+                    var licenceInputs = document.querySelectorAll('input[name="licence"]');
+                    if (licenceInputs.length > 0) {
+                        var licenceGroup = licenceInputs[0].closest('.form-group');
+                        if (licenceGroup) licenceGroup.classList.add('has-error');
+                    }
+                    valid = false;
+                }
+
+                if (!valid) {
+                    var firstErr = document.querySelector('.form-group.has-error');
+                    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                return valid;
+            }
+
+            return true;
+        }
+
+        function setError(input) {
+            var group = input.closest('.form-group');
+            if (group) group.classList.add('has-error');
+            input.classList.add('error');
+        }
+
+        function clearErrors() {
+            var errorGroups = document.querySelectorAll('.form-group.has-error');
+            for (var i = 0; i < errorGroups.length; i++) {
+                errorGroups[i].classList.remove('has-error');
+            }
+            var errorInputs = document.querySelectorAll('.form-input.error');
+            for (var j = 0; j < errorInputs.length; j++) {
+                errorInputs[j].classList.remove('error');
+            }
+            var tw = document.getElementById('termsWrap');
+            if (tw) tw.classList.remove('has-error');
+        }
+
+        // Clear error on input focus
+        var formInputs = document.querySelectorAll('.form-input');
+        for (var fi = 0; fi < formInputs.length; fi++) {
+            formInputs[fi].addEventListener('focus', function() {
+                var group = this.closest('.form-group');
+                if (group) group.classList.remove('has-error');
+                this.classList.remove('error');
+            });
+        }
+
+        // ---- Summary Generation ----
+        function generateSummary() {
+            var courseRadio = document.querySelector('input[name="course"]:checked');
+            var courseVal = courseRadio ? courseRadio.value : '';
+            var trans = getTransmission();
+            var data = courseData[courseVal];
+
+            document.getElementById('sumCourse').textContent = data ? data.name : '\u2014';
+            document.getElementById('sumTransmission').textContent = trans;
+
+            if (data) {
+                var price = (trans === 'Manual') ? data.manual : data.auto;
+                document.getElementById('sumPrice').textContent = '\u00A3' + price.toLocaleString();
+            }
+
+            if (selectedDate) {
+                var dateObj = new Date(selectedDate + 'T00:00:00');
+                var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('sumDate').textContent = dateObj.toLocaleDateString('en-GB', options);
+            }
+
+            document.getElementById('sumTime').textContent = selectedTime || '\u2014';
+            document.getElementById('sumInstructor').textContent = document.getElementById('instructor').value;
+            document.getElementById('sumArea').textContent = document.getElementById('pickupArea').value || 'Not specified';
+
+            document.getElementById('sumName').textContent = document.getElementById('fullName').value;
+            document.getElementById('sumEmail').textContent = document.getElementById('email').value;
+            document.getElementById('sumPhone').textContent = document.getElementById('phone').value;
+
+            var licence = document.querySelector('input[name="licence"]:checked');
+            document.getElementById('sumLicence').textContent = licence ? licence.value : '\u2014';
+            document.getElementById('sumExperience').textContent = document.getElementById('experience').value;
+
+            var contact = document.querySelector('input[name="contactMethod"]:checked');
+            document.getElementById('sumContact').textContent = contact ? contact.value : 'Phone';
+        }
+
+        // ---- Confirm Booking ----
+        window.confirmBooking = function() {
+            var termsBox = document.getElementById('termsAgree');
+            var termsWrap = document.getElementById('termsWrap');
+
+            if (!termsBox.checked) {
+                termsWrap.classList.add('has-error');
+                termsWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Generate reference number IMP-XXXXX
+            var refNum = 'IMP-' + (Math.floor(10000 + Math.random() * 90000));
+            document.getElementById('refNumber').textContent = refNum;
+
+            // Show modal
+            document.getElementById('successModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // ---- Close Modal ----
+        window.closeModal = function() {
+            document.getElementById('successModal').classList.remove('active');
+            document.body.style.overflow = '';
+            window.location.href = '../index.html';
+        };
+
+        // Close modal on overlay click
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                window.closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                var modal = document.getElementById('successModal');
+                if (modal.classList.contains('active')) {
+                    window.closeModal();
+                }
+            }
+        });
+
+    })();
+    -->
+    <script src="../js/cookie-consent.js"></script>
+    <script src="../js/whatsapp-widget.js"></script>
+</body>
+</html>

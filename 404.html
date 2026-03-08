@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found - Impulse Driving School Manchester">
+    <title>Page Not Found | Impulse Driving School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a1628;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .error-page {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .error-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(26, 115, 232, 0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 80%, rgba(26, 115, 232, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .error-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .error-icon {
+            font-size: 5rem;
+            color: #1a73e8;
+            margin-bottom: 1rem;
+            animation: steeringWobble 3s ease-in-out infinite;
+        }
+
+        @keyframes steeringWobble {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        .error-code {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, #1a73e8, #4fc3f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .error-road {
+            width: 100%;
+            max-width: 400px;
+            height: 4px;
+            background: #1e293b;
+            margin: 0 auto 2rem;
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .error-road::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, #fbbf24 0%, #fbbf24 20px, transparent 20px, transparent 40px);
+        }
+
+        .error-car {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #1a73e8;
+            animation: carDrive 4s ease-in-out infinite;
+        }
+
+        @keyframes carDrive {
+            0% { left: -10%; }
+            50% { left: 50%; }
+            51% { left: 50%; transform: translateY(-50%) scaleX(-1); }
+            100% { left: -10%; transform: translateY(-50%) scaleX(-1); }
+        }
+
+        .error-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .error-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-404 {
+            background: #1a73e8;
+            color: #fff;
+        }
+
+        .btn-primary-404:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn-outline-404 {
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-outline-404:hover {
+            border-color: #1a73e8;
+            background: rgba(26, 115, 232, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .error-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .error-nav a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .error-nav a:hover {
+            color: #1a73e8;
+        }
+
+        .error-nav span {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .error-footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .error-footer .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-footer .logo-icon {
+            color: #1a73e8;
+            font-size: 1.5rem;
+        }
+
+        .error-footer .logo-accent {
+            color: #1a73e8;
+        }
+
+        .error-footer p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .error-footer a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+        }
+
+        .error-footer a:hover {
+            color: #1a73e8;
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.35rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+
+            .error-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .error-links a {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="error-page">
+        <div class="error-content">
+            <div class="error-icon">
+                <i class="fas fa-dharmachakra"></i>
+            </div>
+            <div class="error-code">404</div>
+            <h1 class="error-title">Looks like you've taken a wrong turn!</h1>
+            <p class="error-message">Don't worry, even the best drivers miss a turn sometimes. The page you're looking for has either moved, been removed, or never existed. Let's get you back on the right road.</p>
+
+            <div class="error-road">
+                <div class="error-car"><i class="fas fa-car-side"></i></div>
+            </div>
+
+            <div class="error-links">
+                <a href="index.html" class="btn-primary-404">
+                    <i class="fas fa-home"></i> Back to Homepage
+                </a>
+                <a href="pages/booking.html" class="btn-outline-404">
+                    <i class="fas fa-calendar-check"></i> Book a Lesson
+                </a>
+                <a href="pages/contact.html" class="btn-outline-404">
+                    <i class="fas fa-phone"></i> Contact Us
+                </a>
+            </div>
+
+            <div class="error-nav">
+                <a href="pages/about.html">About Us</a>
+                <span>|</span>
+                <a href="pages/services.html">Services</a>
+                <span>|</span>
+                <a href="pages/pricing.html">Pricing</a>
+                <span>|</span>
+                <a href="pages/areas.html">Areas</a>
+                <span>|</span>
+                <a href="pages/contact.html">Contact</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="error-footer">
+        <a href="index.html" class="logo">
+            <span class="logo-icon"><i class="fas fa-car-side"></i></span>
+            Impulse<span class="logo-accent">Drive</span>
+        </a>
+        <p>&copy; 2024 Impulse Driving School. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="tel:07368543368">07368 543 368</a> |
+            <a href="mailto:info@impulsedrive.co.uk">info@impulsedrive.co.uk</a>
+        </p>
+    </footer>
+</body>
+</html>

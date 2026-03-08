@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Dashboard | Impulse Driving School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="sidebar-logo">
+                <span class="logo-icon"><i class="fas fa-car-side"></i></span>
+                <span class="logo-text">Impulse<span class="logo-accent">Drive</span></span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-section="bookings">
+                <i class="fas fa-calendar-check"></i>
+                <span>Bookings</span>
+            </a>
+            <a href="#" class="nav-item" data-section="contacts">
+                <i class="fas fa-envelope"></i>
+                <span>Messages</span>
+            </a>
+            <a href="#" class="nav-item" data-section="newsletter">
+                <i class="fas fa-newspaper"></i>
+                <span>Newsletter</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Site</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <button class="hamburger-admin" id="sidebarToggle" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="topbar-title" id="pageTitle">Dashboard</h1>
+            <div class="topbar-actions">
+                <button class="btn-icon" id="refreshBtn" title="Refresh data">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section class="content-section active" id="section-dashboard">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon bookings-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTotalBookings">--</span>
+                        <span class="stat-label">Total Bookings</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon pending-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statPendingBookings">--</span>
+                        <span class="stat-label">Pending</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon contacts-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTotalContacts">--</span>
+                        <span class="stat-label">Messages</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon unread-icon"><i class="fas fa-envelope-open-text"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statUnreadContacts">--</span>
+                        <span class="stat-label">Unread</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon revenue-icon"><i class="fas fa-pound-sign"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statRevenue">--</span>
+                        <span class="stat-label">Revenue</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon subs-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statSubscribers">--</span>
+                        <span class="stat-label">Subscribers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-panels">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Recent Bookings</h2>
+                        <a href="#" class="panel-link" data-section="bookings">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Customer</th>
+                                    <th>Course</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentBookingsBody">
+                                <tr><td colspan="5" class="empty-state">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Recent Messages</h2>
+                        <a href="#" class="panel-link" data-section="contacts">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Subject</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentContactsBody">
+                                <tr><td colspan="4" class="empty-state">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bookings Section -->
+        <section class="content-section" id="section-bookings">
+            <div class="section-toolbar">
+                <div class="toolbar-filters">
+                    <select id="bookingStatusFilter" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <input type="text" id="bookingSearch" class="filter-input" placeholder="Search by name, email, or reference...">
+                </div>
+                <span class="toolbar-count" id="bookingsCount">0 bookings</span>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Customer</th>
+                            <th>Course</th>
+                            <th>Transmission</th>
+                            <th>Date &amp; Time</th>
+                            <th>Status</th>
+                            <th>Payment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsBody">
+                        <tr><td colspan="8" class="empty-state">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Contacts Section -->
+        <section class="content-section" id="section-contacts">
+            <div class="section-toolbar">
+                <div class="toolbar-filters">
+                    <select id="contactStatusFilter" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="unread">Unread</option>
+                        <option value="read">Read</option>
+                        <option value="replied">Replied</option>
+                    </select>
+                    <input type="text" id="contactSearch" class="filter-input" placeholder="Search by name, email, or subject...">
+                </div>
+                <span class="toolbar-count" id="contactsCount">0 messages</span>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contactsBody">
+                        <tr><td colspan="8" class="empty-state">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="content-section" id="section-newsletter">
+            <div class="section-toolbar">
+                <div class="toolbar-filters">
+                    <input type="text" id="newsletterSearch" class="filter-input" placeholder="Search by email...">
+                </div>
+                <span class="toolbar-count" id="newsletterCount">0 subscribers</span>
+            </div>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Subscribed</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="newsletterBody">
+                        <tr><td colspan="4" class="empty-state">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Details</h2>
+                <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Confirm Dialog -->
+    <div class="modal-overlay" id="confirmDialog">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h2>Confirm Action</h2>
+                <button class="modal-close" id="confirmClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="confirmCancel">Cancel</button>
+                <button class="btn btn-danger" id="confirmOk">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>
