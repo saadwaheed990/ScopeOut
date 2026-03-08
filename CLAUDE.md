@@ -30,14 +30,16 @@ Full-stack website for **Impulse Driving School** (impulsedrive.co.uk), Manchest
 ├── css/
 │   ├── style.css           # Main stylesheet (all shared styles)
 │   ├── booking.css         # Booking page styles (extracted from inline)
-│   └── pricing.css         # Pricing page styles (extracted from inline)
+│   ├── pricing.css         # Pricing page styles (extracted from inline)
+│   └── admin.css           # Admin dashboard styles (sidebar, tables, modals)
 ├── js/
 │   ├── main.js             # Main JS (preloader, nav, slider, counters, FAQ, AOS)
 │   ├── booking.js          # Booking form multi-step logic and validation
 │   ├── pricing.js          # Pricing manual/automatic tab toggle
 │   ├── contact.js          # Contact form validation
 │   ├── cookie-consent.js   # Cookie consent banner
-│   └── whatsapp-widget.js  # WhatsApp floating chat widget
+│   ├── whatsapp-widget.js  # WhatsApp floating chat widget
+│   └── admin.js            # Admin dashboard logic (data fetching, tables, actions)
 ├── pages/
 │   ├── about.html          # Company history, timeline, instructor profiles
 │   ├── services.html       # Detailed course descriptions
@@ -46,7 +48,8 @@ Full-stack website for **Impulse Driving School** (impulsedrive.co.uk), Manchest
 │   ├── areas.html          # Coverage areas and test centres
 │   ├── contact.html        # Contact form, map, hours
 │   ├── privacy.html        # Privacy policy
-│   └── terms.html          # Terms and conditions
+│   ├── terms.html          # Terms and conditions
+│   └── admin.html          # Admin dashboard (noindex, no auth)
 ├── server/
 │   ├── index.js            # Express app entry point
 │   ├── package.json        # Backend dependencies
@@ -60,7 +63,7 @@ Full-stack website for **Impulse Driving School** (impulsedrive.co.uk), Manchest
 │   │   ├── contact.js      # POST /api/contact
 │   │   ├── newsletter.js   # POST /api/newsletter
 │   │   ├── payments.js     # Stripe payment intents
-│   │   └── admin.js        # Admin dashboard endpoints
+│   │   └── admin.js        # Admin CRUD endpoints (GET/PATCH/DELETE)
 │   └── utils/
 │       ├── email.js        # Email sending helpers
 │       ├── reference.js    # Booking reference generator (IMP-XXXXX)
@@ -95,7 +98,14 @@ Full-stack website for **Impulse Driving School** (impulsedrive.co.uk), Manchest
 - `POST /api/newsletter` - Newsletter subscription
 - `POST /api/payments/create-intent` - Create Stripe payment intent
 - `GET /api/admin/bookings` - List all bookings (admin)
+- `GET /api/admin/contacts` - List all contact submissions (admin)
+- `GET /api/admin/newsletter` - List all newsletter subscribers (admin)
 - `GET /api/admin/stats` - Dashboard statistics (admin)
+- `PATCH /api/admin/bookings/:id` - Update booking status/payment (admin)
+- `PATCH /api/admin/contacts/:id` - Update contact status (admin)
+- `DELETE /api/admin/bookings/:id` - Delete a booking (admin)
+- `DELETE /api/admin/contacts/:id` - Delete a contact (admin)
+- `DELETE /api/admin/newsletter/:id` - Remove a subscriber (admin)
 
 ## Business Information
 - **Company**: Impulse Driving School, Manchester, est. 2017
@@ -112,6 +122,7 @@ Full-stack website for **Impulse Driving School** (impulsedrive.co.uk), Manchest
 - AOS (Animate On Scroll) is custom implementation using IntersectionObserver
 - FAQ uses maxHeight animation for smooth open/close
 - Booking reference numbers generated server-side via `server/utils/reference.js` (IMP-XXXXX format), with client-side fallback
+- Admin panel at `pages/admin.html` — standalone page (own CSS/JS, no shared nav/footer), no authentication required
 - Run tests with `npx playwright test` from project root
 - Run backend with `node server/index.js` (requires `cd server && npm install` first)
 - Copy `server/.env.example` to `server/.env` and fill in Stripe/email credentials
