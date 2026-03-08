@@ -32,17 +32,21 @@ app.use(helmet({
 // Request logging
 app.use(morgan('dev'));
 
-// CORS - allow local development origins
+// CORS configuration
+const corsOrigins = process.env.VERCEL
+  ? true // Allow all origins on Vercel (same-origin requests)
+  : [
+      'http://localhost:3000',
+      'http://localhost:5500',
+      'http://localhost:8080',
+      'http://127.0.0.1:3000',
+      'http://127.0.0.1:5500',
+      'http://127.0.0.1:8080'
+    ];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5500',
-    'http://localhost:8080',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:5500',
-    'http://127.0.0.1:8080'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  origin: corsOrigins,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'stripe-signature']
 }));
 
@@ -85,31 +89,33 @@ app.use(express.static(path.join(__dirname, '..')));
 // Global error handler (must be last middleware)
 app.use(errorHandler);
 
-// Start server
-const server = app.listen(PORT, () => {
-  console.log(`Impulse Driving School server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`Static files served from: ${path.join(__dirname, '..')}`);
-  console.log(`API available at: http://localhost:${PORT}/api`);
-});
-
-// Graceful shutdown
-function shutdown() {
-  console.log('\nShutting down gracefully...');
-  server.close(() => {
-    closeDb();
-    console.log('Server closed');
-    process.exit(0);
+// Only start the server when running directly (not on Vercel)
+if (!process.env.VERCEL) {
+  const server = app.listen(PORT, () => {
+    console.log(`Impulse Driving School server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`Static files served from: ${path.join(__dirname, '..')}`);
+    console.log(`API available at: http://localhost:${PORT}/api`);
   });
 
-  // Force exit after 10 seconds
-  setTimeout(() => {
-    console.error('Forced shutdown after timeout');
-    process.exit(1);
-  }, 10000);
-}
+  // Graceful shutdown
+  function shutdown() {
+    console.log('\nShutting down gracefully...');
+    server.close(() => {
+      closeDb();
+      console.log('Server closed');
+      process.exit(0);
+    });
 
-process.on('SIGTERM', shutdown);
-process.on('SIGINT', shutdown);
+    // Force exit after 10 seconds
+    setTimeout(() => {
+      console.error('Forced shutdown after timeout');
+      process.exit(1);
+    }, 10000);
+  }
+
+  process.on('SIGTERM', shutdown);
+  process.on('SIGINT', shutdown);
+}
 
 module.exports = app;
