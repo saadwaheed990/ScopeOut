@@ -388,9 +388,15 @@ body {
 
 .filter-select:focus,
 .filter-input:focus {
-    outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    outline: 2px solid transparent;
+}
+
+.filter-select:focus-visible,
+.filter-input:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .filter-input {
@@ -561,8 +567,13 @@ body {
 }
 
 .status-select:focus {
-    outline: none;
     border-color: var(--primary);
+    outline: 2px solid transparent;
+}
+
+.status-select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* ----- Modals ----- */

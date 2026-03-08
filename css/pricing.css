@@ -4,7 +4,7 @@
 
 .page-hero {
     padding: 10rem 0 4rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark, #1a1a2e) 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark, #1557b0) 100%);
     text-align: center;
     color: #fff;
     position: relative;
@@ -67,9 +67,9 @@
     padding: 1rem 3rem;
     font-size: 1.1rem;
     font-weight: 600;
-    border: 2px solid var(--primary, #4361ee);
+    border: 2px solid var(--primary, #1a73e8);
     background: transparent;
-    color: var(--primary, #4361ee);
+    color: var(--primary, #1a73e8);
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
@@ -84,12 +84,12 @@
 }
 
 .tab-btn.tab-active {
-    background: var(--primary, #4361ee);
+    background: var(--primary, #1a73e8);
     color: #fff;
 }
 
 .tab-btn:hover:not(.tab-active) {
-    background: rgba(67, 97, 238, 0.1);
+    background: rgba(26, 115, 232, 0.1);
 }
 
 /* Pricing Table */
@@ -124,7 +124,7 @@
 }
 
 .price-card.featured {
-    border: 2px solid var(--primary, #4361ee);
+    border: 2px solid var(--primary, #1a73e8);
 }
 
 .price-card.featured::before {
@@ -132,7 +132,7 @@
     position: absolute;
     top: 16px;
     right: -30px;
-    background: var(--primary, #4361ee);
+    background: var(--primary, #1a73e8);
     color: #fff;
     padding: 4px 40px;
     font-size: 0.75rem;
@@ -170,7 +170,7 @@
 .price-card-price {
     font-size: 2.5rem;
     font-weight: 800;
-    color: var(--primary, #4361ee);
+    color: var(--primary, #1a73e8);
     margin: 1rem 0;
 }
 
@@ -191,7 +191,7 @@
 }
 
 .price-card-detail i {
-    color: var(--primary, #4361ee);
+    color: var(--primary, #1a73e8);
     font-size: 0.85rem;
 }
 
@@ -226,7 +226,7 @@
 
 .included-item i {
     font-size: 1.5rem;
-    color: var(--primary, #4361ee);
+    color: var(--primary, #1a73e8);
     flex-shrink: 0;
     margin-top: 2px;
 }
@@ -287,14 +287,14 @@
 }
 
 .plan-option:hover {
-    border-color: var(--primary, #4361ee);
+    border-color: var(--primary, #1a73e8);
     transform: translateY(-3px);
 }
 
 .plan-option .plan-months {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--primary, #4361ee);
+    color: var(--primary, #1a73e8);
 }
 
 .plan-option .plan-label {
@@ -305,7 +305,7 @@
 }
 
 .payment-visual {
-    background: linear-gradient(135deg, var(--primary, #4361ee), #7c3aed);
+    background: linear-gradient(135deg, var(--primary, #1a73e8), #7c3aed);
     border-radius: 20px;
     padding: 3rem;
     color: #fff;
@@ -346,7 +346,7 @@
 /* CTA Section */
 .pricing-cta {
     padding: 5rem 0;
-    background: linear-gradient(135deg, var(--primary, #4361ee) 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, var(--primary, #1a73e8) 0%, #7c3aed 100%);
     text-align: center;
     color: #fff;
 }
@@ -377,15 +377,9 @@
         grid-template-columns: 1fr;
     }
     .payment-plans-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
     .plan-option .plan-months {
         font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .payment-plans-grid {
-        grid-template-columns: repeat(2, 1fr);
     }
 }

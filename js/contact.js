@@ -141,10 +141,10 @@
             }
         })
         .catch(function(err) {
-            // Fallback: show success even if API is unavailable (graceful degradation)
-            console.warn('API unavailable:', err);
-            form.style.display = 'none';
-            successMsg.style.display = 'block';
+            console.error('Contact form submission failed:', err);
+            alert('Unable to send message. Please check your connection and try again.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
         });
     });
 })();
