@@ -157,7 +157,11 @@
                 container.style.right = '24px';
             }
         }
-        mq.addListener(handleMobile);
+        if (mq.addEventListener) {
+            mq.addEventListener('change', handleMobile);
+        } else {
+            mq.addListener(handleMobile);
+        }
         handleMobile(mq);
     }
 })();

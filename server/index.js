@@ -20,12 +20,32 @@ const adminRouter = require('./routes/admin');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Validate required environment variables in production
+if (process.env.NODE_ENV === 'production') {
+  const required = ['STRIPE_SECRET_KEY', 'STRIPE_WEBHOOK_SECRET', 'ADMIN_API_KEY'];
+  const missing = required.filter(key => !process.env[key] || process.env[key].includes('your_'));
+  if (missing.length > 0) {
+    console.error('Missing required environment variables:', missing.join(', '));
+    process.exit(1);
+  }
+}
+
 // Initialize database on startup
 getDb();
 
 // Security headers
 app.use(helmet({
-  contentSecurityPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://js.stripe.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://api.stripe.com"],
+      frameSrc: ["https://js.stripe.com"]
+    }
+  },
   crossOriginEmbedderPolicy: false
 }));
 
@@ -33,8 +53,8 @@ app.use(helmet({
 app.use(morgan('dev'));
 
 // CORS configuration
-const corsOrigins = process.env.VERCEL
-  ? true // Allow all origins on Vercel (same-origin requests)
+const corsOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(s => s.trim())
   : [
       'http://localhost:3000',
       'http://localhost:5500',
@@ -47,7 +67,7 @@ const corsOrigins = process.env.VERCEL
 app.use(cors({
   origin: corsOrigins,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'stripe-signature']
+  allowedHeaders: ['Content-Type', 'Authorization', 'stripe-signature', 'X-Admin-Key']
 }));
 
 // Stripe webhook route MUST come before JSON body parser
@@ -71,10 +91,23 @@ const formLimiter = rateLimit({
   legacyHeaders: false
 });
 
+// Rate limiting for admin endpoints
+const adminLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: isTest ? 1000 : 100,
+  message: {
+    success: false,
+    error: 'Too many requests. Please try again later.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
 // Apply rate limiting to form submission endpoints
 app.use('/api/bookings', formLimiter);
 app.use('/api/contact', formLimiter);
 app.use('/api/newsletter', formLimiter);
+app.use('/api/admin', adminLimiter);
 
 // Mount API routes
 app.use('/api/bookings', bookingsRouter);

@@ -1,5 +1,15 @@
 const nodemailer = require('nodemailer');
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 let transporter = null;
 
 function getTransporter() {
@@ -13,10 +23,11 @@ function getTransporter() {
       return null;
     }
 
+    const port = parseInt(process.env.SMTP_PORT || '587', 10);
     transporter = nodemailer.createTransport({
       host: host,
-      port: parseInt(process.env.SMTP_PORT || '587', 10),
-      secure: false,
+      port: port,
+      secure: port === 465,
       auth: {
         user: user,
         pass: pass
@@ -79,22 +90,22 @@ async function sendBookingConfirmation(booking) {
           <p>Booking Confirmation</p>
         </div>
         <div class="content">
-          <p>Dear ${booking.name},</p>
+          <p>Dear ${escapeHtml(booking.name)},</p>
           <p>Thank you for booking with Impulse Driving School! Your booking has been confirmed.</p>
 
-          <div class="reference">Reference: ${booking.reference}</div>
+          <div class="reference">Reference: ${escapeHtml(booking.reference)}</div>
 
           <div class="details">
             <table>
-              <tr><td>Course</td><td>${booking.course}</td></tr>
-              <tr><td>Transmission</td><td>${booking.transmission}</td></tr>
-              <tr><td>Date</td><td>${booking.date}</td></tr>
-              <tr><td>Time Slot</td><td>${booking.time_slot}</td></tr>
-              <tr><td>Status</td><td>${booking.status}</td></tr>
+              <tr><td>Course</td><td>${escapeHtml(booking.course)}</td></tr>
+              <tr><td>Transmission</td><td>${escapeHtml(booking.transmission)}</td></tr>
+              <tr><td>Date</td><td>${escapeHtml(booking.date)}</td></tr>
+              <tr><td>Time Slot</td><td>${escapeHtml(booking.time_slot)}</td></tr>
+              <tr><td>Status</td><td>${escapeHtml(booking.status)}</td></tr>
             </table>
           </div>
 
-          ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
+          ${booking.notes ? `<p><strong>Notes:</strong> ${escapeHtml(booking.notes)}</p>` : ''}
 
           <p>Please keep your reference number safe. You can use it to check your booking status.</p>
 
@@ -143,16 +154,16 @@ async function sendContactNotification(contact) {
         <div class="content">
           <div class="details">
             <table>
-              <tr><td>Name</td><td>${contact.name}</td></tr>
-              <tr><td>Email</td><td>${contact.email}</td></tr>
-              <tr><td>Phone</td><td>${contact.phone || 'Not provided'}</td></tr>
-              <tr><td>Subject</td><td>${contact.subject}</td></tr>
+              <tr><td>Name</td><td>${escapeHtml(contact.name)}</td></tr>
+              <tr><td>Email</td><td>${escapeHtml(contact.email)}</td></tr>
+              <tr><td>Phone</td><td>${escapeHtml(contact.phone) || 'Not provided'}</td></tr>
+              <tr><td>Subject</td><td>${escapeHtml(contact.subject)}</td></tr>
             </table>
           </div>
 
           <h3>Message:</h3>
           <div class="message-box">
-            <p>${contact.message}</p>
+            <p>${escapeHtml(contact.message)}</p>
           </div>
 
           <p><small>Received at: ${new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' })}</small></p>

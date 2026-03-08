@@ -10,6 +10,12 @@
         ? 'http://localhost:3000'
         : '';
 
+    // Admin API key — read from URL query param
+    var ADMIN_KEY = (function() {
+        var params = new URLSearchParams(window.location.search);
+        return params.get('key') || '';
+    })();
+
     // ---- State ----
     var state = {
         stats: null,
@@ -211,6 +217,11 @@
     }
 
     function fetchJSON(url, options) {
+        options = options || {};
+        options.headers = options.headers || {};
+        if (ADMIN_KEY) {
+            options.headers['X-Admin-Key'] = ADMIN_KEY;
+        }
         return fetch(API_BASE + url, options).then(function (res) {
             return res.json();
         });
@@ -296,11 +307,11 @@
                 + '<td><span class="badge badge-' + b.status + '">' + b.status + '</span></td>'
                 + '<td><span class="badge badge-' + b.payment_status + '">' + b.payment_status + '</span></td>'
                 + '<td><div class="action-group">'
-                + '<button class="btn-action btn-view" title="View details" onclick="AdminPanel.viewBooking(' + b.id + ')"><i class="fas fa-eye"></i></button>'
-                + '<select class="status-select" onchange="AdminPanel.updateBookingStatus(' + b.id + ', this.value)" title="Change status">'
+                + '<button class="btn-action btn-view" title="View details" data-action="view-booking" data-id="' + b.id + '"><i class="fas fa-eye"></i></button>'
+                + '<select class="status-select" data-action="status-booking" data-id="' + b.id + '" title="Change status">'
                 + statusOptions(['pending', 'confirmed', 'completed', 'cancelled'], b.status)
                 + '</select>'
-                + '<button class="btn-action btn-delete" title="Delete" onclick="AdminPanel.deleteBooking(' + b.id + ', \'' + escapeHtml(b.reference) + '\')"><i class="fas fa-trash"></i></button>'
+                + '<button class="btn-action btn-delete" title="Delete" data-action="delete-booking" data-id="' + b.id + '" data-ref="' + escapeHtml(b.reference) + '"><i class="fas fa-trash"></i></button>'
                 + '</div></td>'
                 + '</tr>';
         }
@@ -340,15 +351,15 @@
                 + '<td>' + escapeHtml(c.email) + '</td>'
                 + '<td>' + escapeHtml(c.phone || '-') + '</td>'
                 + '<td>' + escapeHtml(c.subject) + '</td>'
-                + '<td class="cell-message" onclick="AdminPanel.viewContact(' + c.id + ')" title="Click to read">' + escapeHtml(c.message) + '</td>'
+                + '<td class="cell-message" data-action="view-contact" data-id="' + c.id + '" title="Click to read">' + escapeHtml(c.message) + '</td>'
                 + '<td>' + formatDateTime(c.created_at) + '</td>'
                 + '<td><span class="badge badge-' + c.status + '">' + c.status + '</span></td>'
                 + '<td><div class="action-group">'
-                + '<button class="btn-action btn-view" title="View" onclick="AdminPanel.viewContact(' + c.id + ')"><i class="fas fa-eye"></i></button>'
-                + '<select class="status-select" onchange="AdminPanel.updateContactStatus(' + c.id + ', this.value)" title="Change status">'
+                + '<button class="btn-action btn-view" title="View" data-action="view-contact" data-id="' + c.id + '"><i class="fas fa-eye"></i></button>'
+                + '<select class="status-select" data-action="status-contact" data-id="' + c.id + '" title="Change status">'
                 + statusOptions(['unread', 'read', 'replied'], c.status)
                 + '</select>'
-                + '<button class="btn-action btn-delete" title="Delete" onclick="AdminPanel.deleteContact(' + c.id + ')"><i class="fas fa-trash"></i></button>'
+                + '<button class="btn-action btn-delete" title="Delete" data-action="delete-contact" data-id="' + c.id + '"><i class="fas fa-trash"></i></button>'
                 + '</div></td>'
                 + '</tr>';
         }
@@ -390,7 +401,7 @@
                 + '<td>' + formatDateTime(s.subscribed_at) + '</td>'
                 + '<td><span class="badge badge-' + statusClass + '">' + statusText + '</span></td>'
                 + '<td><div class="action-group">'
-                + '<button class="btn-action btn-delete" title="Remove subscriber" onclick="AdminPanel.deleteSubscriber(' + s.id + ', \'' + escapeHtml(s.email) + '\')"><i class="fas fa-trash"></i></button>'
+                + '<button class="btn-action btn-delete" title="Remove subscriber" data-action="delete-subscriber" data-id="' + s.id + '" data-email="' + escapeHtml(s.email) + '"><i class="fas fa-trash"></i></button>'
                 + '</div></td>'
                 + '</tr>';
         }
@@ -630,17 +641,34 @@
         return div.innerHTML;
     }
 
-    // ========== PUBLIC API (for onclick handlers) ==========
+    // ========== EVENT DELEGATION ==========
 
-    window.AdminPanel = {
-        viewBooking: viewBooking,
-        updateBookingStatus: updateBookingStatus,
-        deleteBooking: deleteBooking,
-        viewContact: viewContact,
-        updateContactStatus: updateContactStatus,
-        deleteContact: deleteContact,
-        deleteSubscriber: deleteSubscriber
-    };
+    document.addEventListener('click', function (e) {
+        var target = e.target.closest('[data-action]');
+        if (!target) return;
+        var action = target.getAttribute('data-action');
+        var id = parseInt(target.getAttribute('data-id'), 10);
+
+        switch (action) {
+            case 'view-booking': viewBooking(id); break;
+            case 'delete-booking': deleteBooking(id, target.getAttribute('data-ref')); break;
+            case 'view-contact': viewContact(id); break;
+            case 'delete-contact': deleteContact(id); break;
+            case 'delete-subscriber': deleteSubscriber(id, target.getAttribute('data-email')); break;
+        }
+    });
+
+    document.addEventListener('change', function (e) {
+        var target = e.target.closest('[data-action]');
+        if (!target) return;
+        var action = target.getAttribute('data-action');
+        var id = parseInt(target.getAttribute('data-id'), 10);
+
+        switch (action) {
+            case 'status-booking': updateBookingStatus(id, target.value); break;
+            case 'status-contact': updateContactStatus(id, target.value); break;
+        }
+    });
 
     // ========== START ==========
 

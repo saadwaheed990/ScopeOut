@@ -14,10 +14,10 @@
         try {
             var prefs = JSON.parse(saved);
             applyConsent(prefs);
+            return;
         } catch (e) {
             localStorage.removeItem(STORAGE_KEY);
         }
-        if (saved) return;
     }
 
     // Wait for DOM ready
@@ -325,19 +325,8 @@
     }
 
     function applyConsent(prefs) {
-        // Block or allow analytics cookies
-        if (prefs.analytics) {
-            window.impulse_analytics_consent = true;
-        } else {
-            window.impulse_analytics_consent = false;
-        }
-
-        // Block or allow marketing cookies
-        if (prefs.marketing) {
-            window.impulse_marketing_consent = true;
-        } else {
-            window.impulse_marketing_consent = false;
-        }
+        window.impulse_analytics_consent = !!prefs.analytics;
+        window.impulse_marketing_consent = !!prefs.marketing;
     }
 
     function hideBanner() {

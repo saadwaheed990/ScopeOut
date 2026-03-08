@@ -427,12 +427,8 @@
             }
         })
         .catch(function(err) {
-            // Fallback: generate client-side reference if API is unavailable
-            console.warn('API unavailable, generating client-side reference:', err);
-            var refNum = 'IMP-' + (Math.floor(10000 + Math.random() * 90000));
-            document.getElementById('refNumber').textContent = refNum;
-            document.getElementById('successModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            console.error('Booking submission failed:', err);
+            alert('Unable to submit booking. Please check your connection and try again.');
         })
         .finally(function() {
             confirmBtn.disabled = false;

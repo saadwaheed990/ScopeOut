@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { getDb } = require('../db/init');
+const { adminAuth } = require('../middleware/auth');
+
+// Protect all admin routes
+router.use(adminAuth);
 
 // GET /api/admin/bookings - List all bookings
 router.get('/bookings', (req, res, next) => {
