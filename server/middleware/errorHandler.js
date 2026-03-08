@@ -1,8 +1,6 @@
 function errorHandler(err, req, res, next) {
   console.error('Error:', err.message);
-  if (process.env.NODE_ENV !== 'production') {
-    console.error('Stack:', err.stack);
-  }
+  console.error('Stack:', err.stack);
 
   if (err.type === 'StripeSignatureVerificationError') {
     return res.status(400).json({

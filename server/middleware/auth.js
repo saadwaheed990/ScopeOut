@@ -3,8 +3,6 @@
  * Validates API key for admin endpoints
  */
 
-const crypto = require('crypto');
-
 function adminAuth(req, res, next) {
   const apiKey = process.env.ADMIN_API_KEY;
 
@@ -20,21 +18,9 @@ function adminAuth(req, res, next) {
     return next();
   }
 
-  // Only accept the key from the X-Admin-Key header
-  const provided = req.headers['x-admin-key'];
+  const provided = req.headers['x-admin-key'] || req.query.api_key;
 
-  if (!provided) {
-    return res.status(401).json({
-      success: false,
-      error: 'Unauthorised: invalid or missing admin API key'
-    });
-  }
-
-  // Use timing-safe comparison to prevent timing attacks
-  const providedBuf = Buffer.from(String(provided));
-  const apiKeyBuf = Buffer.from(String(apiKey));
-
-  if (providedBuf.length !== apiKeyBuf.length || !crypto.timingSafeEqual(providedBuf, apiKeyBuf)) {
+  if (!provided || provided !== apiKey) {
     return res.status(401).json({
       success: false,
       error: 'Unauthorised: invalid or missing admin API key'

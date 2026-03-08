@@ -7,12 +7,7 @@
     'use strict';
 
     var STORAGE_KEY = 'impulse_cookie_consent';
-    var saved;
-    try {
-        saved = localStorage.getItem(STORAGE_KEY);
-    } catch (e) {
-        saved = null;
-    }
+    var saved = localStorage.getItem(STORAGE_KEY);
 
     // If consent already given, apply preferences and exit
     if (saved) {

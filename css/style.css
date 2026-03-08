@@ -153,7 +153,6 @@ iframe {
 }
 
 .text-gradient {
-    color: var(--primary);
     background: linear-gradient(135deg, var(--primary), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1952,7 +1951,7 @@ iframe {
 }
 
 .page-hero h1 {
-    font-family: var(--font-heading);
+    font-family: var(--ff-heading);
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--white);
@@ -1998,7 +1997,7 @@ iframe {
 
 /* ----- About Page: Our Story ----- */
 .our-story {
-    padding: var(--space-4xl) 0;
+    padding: var(--space-xxl) 0;
 }
 
 .story-grid {
@@ -2009,7 +2008,7 @@ iframe {
 }
 
 .story-content h2 {
-    font-family: var(--font-heading);
+    font-family: var(--ff-heading);
     font-size: 2rem;
     font-weight: 800;
     color: var(--dark);
@@ -2023,7 +2022,7 @@ iframe {
 }
 
 .story-timeline h3 {
-    font-family: var(--font-heading);
+    font-family: var(--ff-heading);
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--dark);
@@ -2079,7 +2078,7 @@ iframe {
 }
 
 .timeline-content h4 {
-    font-family: var(--font-heading);
+    font-family: var(--ff-heading);
     font-size: 1rem;
     font-weight: 700;
     color: var(--dark);
@@ -2094,7 +2093,7 @@ iframe {
 
 /* ----- Mission & Values ----- */
 .mission-values {
-    padding: var(--space-4xl) 0;
+    padding: var(--space-xxl) 0;
     background: var(--light);
 }
 
@@ -2142,19 +2141,5 @@ textarea:focus-visible {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
-    }
-}
-
-/* ----- Contact Page Grid ----- */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-}
-
-@media (max-width: 768px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
     }
 }

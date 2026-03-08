@@ -75,8 +75,8 @@ app.use(cors({
 app.use('/api/payments/webhook', express.raw({ type: 'application/json' }));
 
 // JSON body parser for all other routes
-app.use(express.json({ limit: '1mb' }));
-app.use(express.urlencoded({ extended: true, limit: '1mb' }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Rate limiting for public-facing form endpoints
 const isTest = process.env.NODE_ENV === 'test';
@@ -107,7 +107,6 @@ const adminLimiter = rateLimit({
 app.use('/api/bookings', formLimiter);
 app.use('/api/contact', formLimiter);
 app.use('/api/newsletter', formLimiter);
-app.use('/api/payments', formLimiter);
 app.use('/api/admin', adminLimiter);
 
 // Mount API routes
@@ -117,35 +116,8 @@ app.use('/api/payments', paymentsRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/admin', adminRouter);
 
-// Serve static frontend files from specific safe directories only
-app.use('/css', express.static(path.join(__dirname, '..', 'css')));
-app.use('/js', express.static(path.join(__dirname, '..', 'js')));
-app.use('/pages', express.static(path.join(__dirname, '..', 'pages')));
-app.use('/images', express.static(path.join(__dirname, '..', 'images')));
-
-// Serve root-level static files (HTML, robots.txt, sitemap.xml, favicon)
-app.use(express.static(path.join(__dirname, '..'), {
-  index: 'index.html',
-  extensions: ['html'],
-  dotfiles: 'deny',
-  setHeaders: function (res, filePath) {
-    // Only allow specific file types from root
-    if (!/\.(html|ico|png|svg|txt|xml)$/i.test(filePath)) {
-      res.status(403);
-    }
-  }
-}));
-
-// Block access to server directory, node_modules, and dotfiles
-app.use('/server', function (req, res) {
-  res.status(403).json({ success: false, error: 'Forbidden' });
-});
-app.use('/node_modules', function (req, res) {
-  res.status(403).json({ success: false, error: 'Forbidden' });
-});
-app.use('/tests', function (req, res) {
-  res.status(403).json({ success: false, error: 'Forbidden' });
-});
+// Serve static frontend files from parent directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // Global error handler (must be last middleware)
 app.use(errorHandler);

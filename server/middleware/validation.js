@@ -23,7 +23,7 @@ const bookingValidation = [
   body('course')
     .trim()
     .notEmpty().withMessage('Course is required')
-,
+    .escape(),
   body('transmission')
     .trim()
     .notEmpty().withMessage('Transmission type is required')
@@ -35,12 +35,12 @@ const bookingValidation = [
   body('time_slot')
     .trim()
     .notEmpty().withMessage('Time slot is required')
-,
+    .escape(),
   body('name')
     .trim()
     .notEmpty().withMessage('Name is required')
     .isLength({ min: 2, max: 100 }).withMessage('Name must be between 2 and 100 characters')
-,
+    .escape(),
   body('email')
     .trim()
     .notEmpty().withMessage('Email is required')
@@ -54,7 +54,7 @@ const bookingValidation = [
     .optional({ values: 'falsy' })
     .trim()
     .isLength({ max: 1000 }).withMessage('Notes must be under 1000 characters')
-,
+    .escape(),
   handleValidationErrors
 ];
 
@@ -63,7 +63,7 @@ const contactValidation = [
     .trim()
     .notEmpty().withMessage('Name is required')
     .isLength({ min: 2, max: 100 }).withMessage('Name must be between 2 and 100 characters')
-,
+    .escape(),
   body('email')
     .trim()
     .notEmpty().withMessage('Email is required')
@@ -77,12 +77,12 @@ const contactValidation = [
     .trim()
     .notEmpty().withMessage('Subject is required')
     .isLength({ min: 2, max: 200 }).withMessage('Subject must be between 2 and 200 characters')
-,
+    .escape(),
   body('message')
     .trim()
     .notEmpty().withMessage('Message is required')
     .isLength({ min: 10, max: 5000 }).withMessage('Message must be between 10 and 5000 characters')
-,
+    .escape(),
   handleValidationErrors
 ];
 
@@ -103,7 +103,10 @@ const paymentValidation = [
   body('course_name')
     .trim()
     .notEmpty().withMessage('Course name is required')
-,
+    .escape(),
+  body('amount')
+    .notEmpty().withMessage('Amount is required')
+    .isFloat({ min: 0.50 }).withMessage('Amount must be at least 0.50'),
   handleValidationErrors
 ];
 
