@@ -15,8 +15,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        /* Pricing Page Styles */
+    <link rel="stylesheet" href="../css/pricing.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Pricing - Impulse Driving School",
+        "description": "Transparent pricing with no hidden fees for driving lessons in Manchester.",
+        "provider": {
+            "@type": "DrivingSchool",
+            "name": "Impulse Driving School",
+            "url": "https://impulsedrive.co.uk"
+        }
+    }
+    </script>
+    <!-- Inline styles extracted to css/pricing.css -->
+    <!--
         .page-hero {
             padding: 10rem 0 4rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark, #1a1a2e) 100%);
@@ -358,7 +372,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-    </style>
+    -->
 </head>
 <body>
     <!-- Preloader -->
@@ -908,6 +922,8 @@
                     <a href="areas.html">Areas Covered</a>
                     <a href="booking.html">Book Now</a>
                     <a href="contact.html">Contact</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
                 </div>
                 <div class="footer-links">
                     <h4>Our Courses</h4>
@@ -958,38 +974,8 @@
     </button>
 
     <script src="../js/main.js"></script>
-
-    <!-- Tab Toggle Script -->
-    <script>
-        (function() {
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const pricingTables = document.querySelectorAll('.pricing-table');
-
-            tabBtns.forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    const targetTab = this.getAttribute('data-tab');
-
-                    // Remove active from all tab buttons
-                    tabBtns.forEach(function(b) {
-                        b.classList.remove('tab-active');
-                    });
-
-                    // Remove active from all pricing tables
-                    pricingTables.forEach(function(table) {
-                        table.classList.remove('tab-active');
-                    });
-
-                    // Add active to clicked button
-                    this.classList.add('tab-active');
-
-                    // Add active to corresponding table
-                    var targetTable = document.getElementById(targetTab);
-                    if (targetTable) {
-                        targetTable.classList.add('tab-active');
-                    }
-                });
-            });
-        })();
-    </script>
+    <script src="../js/pricing.js"></script>
+    <script src="../js/cookie-consent.js"></script>
+    <script src="../js/whatsapp-widget.js"></script>
 </body>
 </html>

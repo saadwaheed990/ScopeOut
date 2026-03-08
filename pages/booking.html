@@ -5,13 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Book your driving lessons online with Impulse Driving School Manchester. Real-time booking, flexible scheduling, manual & automatic lessons available.">
     <meta name="keywords" content="book driving lessons Manchester, driving lesson booking, intensive course booking, Impulse Driving School booking">
+    <meta property="og:title" content="Book Your Driving Lessons | Impulse Driving School Manchester">
+    <meta property="og:description" content="Book driving lessons online with Impulse Driving School. Real-time booking, flexible scheduling, manual & automatic lessons.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://impulsedrive.co.uk/pages/booking.html">
     <title>Book Your Driving Lessons | Impulse Driving School Manchester</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <style>
+    <link rel="stylesheet" href="../css/booking.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Book Driving Lessons - Impulse Driving School",
+        "description": "Book your driving lessons online with Impulse Driving School Manchester.",
+        "provider": {
+            "@type": "DrivingSchool",
+            "name": "Impulse Driving School",
+            "url": "https://impulsedrive.co.uk"
+        }
+    }
+    </script>
+    <!-- Styles in css/booking.css -->
+    <!--
         /* ============================================
            BOOKING PAGE STYLES
            ============================================ */
@@ -1032,7 +1051,7 @@
             .booking-hero h1 { font-size: 1.6rem; }
             .calendar-day { font-size: 0.8rem; }
         }
-    </style>
+    -->
 </head>
 <body>
     <!-- Preloader -->
@@ -1523,6 +1542,8 @@
                     <a href="areas.html">Areas Covered</a>
                     <a href="booking.html">Book Now</a>
                     <a href="contact.html">Contact</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
                 </div>
                 <div class="footer-links">
                     <h4>Our Courses</h4>
@@ -1573,18 +1594,11 @@
     </button>
 
     <script src="../js/main.js"></script>
-
-    <script>
-    /* ============================================================
-       IMPULSE DRIVING SCHOOL - BOOKING PAGE JAVASCRIPT
-       Complete multi-step booking form with calendar, validation,
-       summary generation, and success modal.
-       ============================================================ */
-
+    <script src="../js/booking.js"></script>
+    <!-- Inline booking JS extracted to js/booking.js -->
+    <!--
     (function() {
         'use strict';
-
-        // ---- State ----
         var currentStep = 1;
         var selectedDate = null;
         var selectedTime = null;
@@ -2000,6 +2014,8 @@
         });
 
     })();
-    </script>
+    -->
+    <script src="../js/cookie-consent.js"></script>
+    <script src="../js/whatsapp-widget.js"></script>
 </body>
 </html>

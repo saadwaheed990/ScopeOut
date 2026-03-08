@@ -15,6 +15,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Impulse Driving School",
+        "description": "Get in touch with Impulse Driving School Manchester.",
+        "provider": {
+            "@type": "DrivingSchool",
+            "name": "Impulse Driving School",
+            "telephone": ["+447368543368", "+441614920547", "+441617927171"],
+            "email": "info@impulsedrive.co.uk",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Spaces, Oxford Street",
+                "addressLocality": "Manchester",
+                "postalCode": "M1 5AN",
+                "addressCountry": "GB"
+            }
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Preloader -->
@@ -286,6 +307,8 @@
                     <a href="areas.html">Areas Covered</a>
                     <a href="booking.html">Book Now</a>
                     <a href="contact.html">Contact</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
                 </div>
                 <div class="footer-links">
                     <h4>Our Courses</h4>
@@ -336,123 +359,8 @@
     </button>
 
     <script src="../js/main.js"></script>
-
-    <!-- Contact Form Validation & Submission -->
-    <script>
-    (function() {
-        const form = document.getElementById('contactForm');
-        const successMsg = document.getElementById('formSuccess');
-
-        if (!form) return;
-
-        function showError(id, show) {
-            const el = document.getElementById(id);
-            if (el) el.style.display = show ? 'block' : 'none';
-        }
-
-        function setFieldError(input, hasError) {
-            input.style.borderColor = hasError ? '#e74c3c' : '#e0e0e0';
-        }
-
-        function validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        // Real-time validation on blur
-        const nameInput = document.getElementById('contactName');
-        const emailInput = document.getElementById('contactEmail');
-        const subjectInput = document.getElementById('contactSubject');
-        const messageInput = document.getElementById('contactMessage');
-
-        nameInput.addEventListener('blur', function() {
-            const empty = !this.value.trim();
-            showError('nameError', empty);
-            setFieldError(this, empty);
-        });
-
-        emailInput.addEventListener('blur', function() {
-            const invalid = !validateEmail(this.value.trim());
-            showError('emailError', invalid);
-            setFieldError(this, invalid);
-        });
-
-        subjectInput.addEventListener('change', function() {
-            const empty = !this.value;
-            showError('subjectError', empty);
-            setFieldError(this, empty);
-        });
-
-        messageInput.addEventListener('blur', function() {
-            const empty = !this.value.trim();
-            showError('messageError', empty);
-            setFieldError(this, empty);
-        });
-
-        // Clear error on input
-        [nameInput, emailInput, messageInput].forEach(function(input) {
-            input.addEventListener('input', function() {
-                setFieldError(this, false);
-            });
-        });
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            let isValid = true;
-            const name = nameInput.value.trim();
-            const email = emailInput.value.trim();
-            const subject = subjectInput.value;
-            const message = messageInput.value.trim();
-
-            if (!name) {
-                showError('nameError', true);
-                setFieldError(nameInput, true);
-                isValid = false;
-            } else {
-                showError('nameError', false);
-                setFieldError(nameInput, false);
-            }
-
-            if (!validateEmail(email)) {
-                showError('emailError', true);
-                setFieldError(emailInput, true);
-                isValid = false;
-            } else {
-                showError('emailError', false);
-                setFieldError(emailInput, false);
-            }
-
-            if (!subject) {
-                showError('subjectError', true);
-                setFieldError(subjectInput, true);
-                isValid = false;
-            } else {
-                showError('subjectError', false);
-                setFieldError(subjectInput, false);
-            }
-
-            if (!message) {
-                showError('messageError', true);
-                setFieldError(messageInput, true);
-                isValid = false;
-            } else {
-                showError('messageError', false);
-                setFieldError(messageInput, false);
-            }
-
-            if (!isValid) return;
-
-            // Simulate form submission
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-
-            setTimeout(function() {
-                form.style.display = 'none';
-                successMsg.style.display = 'block';
-            }, 1500);
-        });
-    })();
-    </script>
+    <script src="../js/contact.js"></script>
+    <script src="../js/cookie-consent.js"></script>
+    <script src="../js/whatsapp-widget.js"></script>
 </body>
 </html>
