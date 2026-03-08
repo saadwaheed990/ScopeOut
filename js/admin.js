@@ -92,10 +92,15 @@
     function bindRefresh() {
         document.getElementById('refreshBtn').addEventListener('click', function () {
             var icon = this.querySelector('i');
-            this.classList.add('spinning');
+            var btn = this;
+            btn.classList.add('spinning');
             icon.style.animation = 'spin 1s linear infinite';
             loadAll().then(function () {
                 icon.style.animation = '';
+                btn.classList.remove('spinning');
+            }).catch(function () {
+                icon.style.animation = '';
+                btn.classList.remove('spinning');
             });
         });
     }
@@ -223,6 +228,9 @@
             options.headers['X-Admin-Key'] = ADMIN_KEY;
         }
         return fetch(API_BASE + url, options).then(function (res) {
+            if (!res.ok) {
+                throw new Error('HTTP error ' + res.status);
+            }
             return res.json();
         });
     }
@@ -257,7 +265,7 @@
                 + '<td class="cell-name">' + escapeHtml(b.name) + '</td>'
                 + '<td>' + escapeHtml(b.course) + '</td>'
                 + '<td>' + formatDate(b.date) + '</td>'
-                + '<td><span class="badge badge-' + b.status + '">' + b.status + '</span></td>'
+                + '<td><span class="badge badge-' + sanitizeStatus(b.status) + '">' + escapeHtml(b.status) + '</span></td>'
                 + '</tr>';
         }
         tbody.innerHTML = html;
@@ -277,7 +285,7 @@
                 + '<td class="cell-name">' + escapeHtml(c.name) + '</td>'
                 + '<td>' + escapeHtml(c.subject) + '</td>'
                 + '<td>' + formatDateTime(c.created_at) + '</td>'
-                + '<td><span class="badge badge-' + c.status + '">' + c.status + '</span></td>'
+                + '<td><span class="badge badge-' + sanitizeStatus(c.status) + '">' + escapeHtml(c.status) + '</span></td>'
                 + '</tr>';
         }
         tbody.innerHTML = html;
@@ -304,8 +312,8 @@
                 + '<td>' + escapeHtml(b.course) + '</td>'
                 + '<td>' + escapeHtml(b.transmission || '') + '</td>'
                 + '<td>' + formatDate(b.date) + '<br><span class="cell-email">' + escapeHtml(b.time_slot || '') + '</span></td>'
-                + '<td><span class="badge badge-' + b.status + '">' + b.status + '</span></td>'
-                + '<td><span class="badge badge-' + b.payment_status + '">' + b.payment_status + '</span></td>'
+                + '<td><span class="badge badge-' + sanitizeStatus(b.status) + '">' + escapeHtml(b.status) + '</span></td>'
+                + '<td><span class="badge badge-' + sanitizeStatus(b.payment_status) + '">' + escapeHtml(b.payment_status) + '</span></td>'
                 + '<td><div class="action-group">'
                 + '<button class="btn-action btn-view" title="View details" data-action="view-booking" data-id="' + b.id + '"><i class="fas fa-eye"></i></button>'
                 + '<select class="status-select" data-action="status-booking" data-id="' + b.id + '" title="Change status">'
@@ -353,7 +361,7 @@
                 + '<td>' + escapeHtml(c.subject) + '</td>'
                 + '<td class="cell-message" data-action="view-contact" data-id="' + c.id + '" title="Click to read">' + escapeHtml(c.message) + '</td>'
                 + '<td>' + formatDateTime(c.created_at) + '</td>'
-                + '<td><span class="badge badge-' + c.status + '">' + c.status + '</span></td>'
+                + '<td><span class="badge badge-' + sanitizeStatus(c.status) + '">' + escapeHtml(c.status) + '</span></td>'
                 + '<td><div class="action-group">'
                 + '<button class="btn-action btn-view" title="View" data-action="view-contact" data-id="' + c.id + '"><i class="fas fa-eye"></i></button>'
                 + '<select class="status-select" data-action="status-contact" data-id="' + c.id + '" title="Change status">'
@@ -431,8 +439,8 @@
             + detailRow('Transmission', b.transmission)
             + detailRow('Date', formatDate(b.date))
             + detailRow('Time Slot', b.time_slot)
-            + detailRow('Status', '<span class="badge badge-' + b.status + '">' + b.status + '</span>')
-            + detailRow('Payment', '<span class="badge badge-' + b.payment_status + '">' + b.payment_status + '</span>')
+            + detailRowHtml('Status', '<span class="badge badge-' + sanitizeStatus(b.status) + '">' + escapeHtml(b.status) + '</span>')
+            + detailRowHtml('Payment', '<span class="badge badge-' + sanitizeStatus(b.payment_status) + '">' + escapeHtml(b.payment_status) + '</span>')
             + detailRow('Amount', b.payment_amount ? '\u00A3' + Number(b.payment_amount).toLocaleString() : '-')
             + detailRow('Notes', b.notes || '-')
             + detailRow('Created', formatDateTime(b.created_at));
@@ -499,8 +507,8 @@
             + detailRow('Email', c.email)
             + detailRow('Phone', c.phone || '-')
             + detailRow('Subject', c.subject)
-            + detailRow('Message', '<div style="white-space: pre-wrap;">' + escapeHtml(c.message) + '</div>')
-            + detailRow('Status', '<span class="badge badge-' + c.status + '">' + c.status + '</span>')
+            + detailRowHtml('Message', '<div style="white-space: pre-wrap;">' + escapeHtml(c.message) + '</div>')
+            + detailRowHtml('Status', '<span class="badge badge-' + sanitizeStatus(c.status) + '">' + escapeHtml(c.status) + '</span>')
             + detailRow('Received', formatDateTime(c.created_at));
 
         openDetailModal('Message from ' + c.name, html);
@@ -587,6 +595,8 @@
                 state.stats = result.stats;
                 renderStats();
             }
+        }).catch(function (err) {
+            console.error('Failed to reload stats:', err);
         });
     }
 
@@ -606,7 +616,11 @@
     }
 
     function detailRow(label, value) {
-        return '<div class="detail-row"><span class="detail-label">' + escapeHtml(label) + '</span><span class="detail-value">' + value + '</span></div>';
+        return '<div class="detail-row"><span class="detail-label">' + escapeHtml(label) + '</span><span class="detail-value">' + escapeHtml(value) + '</span></div>';
+    }
+
+    function detailRowHtml(label, html) {
+        return '<div class="detail-row"><span class="detail-label">' + escapeHtml(label) + '</span><span class="detail-value">' + html + '</span></div>';
     }
 
     function formatDate(dateStr) {
@@ -632,6 +646,15 @@
 
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    // Whitelist of valid status values for CSS class names
+    var VALID_STATUSES = ['pending', 'confirmed', 'completed', 'cancelled', 'paid', 'unpaid', 'failed', 'refunded', 'unread', 'read', 'replied', 'active', 'inactive'];
+
+    function sanitizeStatus(status) {
+        if (!status) return 'unknown';
+        var s = String(status).toLowerCase();
+        return VALID_STATUSES.indexOf(s) !== -1 ? s : 'unknown';
     }
 
     function escapeHtml(str) {
