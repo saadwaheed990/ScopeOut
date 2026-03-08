@@ -95,7 +95,7 @@
         var button = document.createElement('a');
         button.href = WHATSAPP_URL;
         button.target = '_blank';
-        button.rel = 'noopener';
+        button.rel = 'noopener noreferrer';
         button.setAttribute('aria-label', 'Chat with us on WhatsApp');
         button.style.cssText = [
             'display: flex',

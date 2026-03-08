@@ -136,6 +136,14 @@ document.addEventListener('DOMContentLoaded', function () {
     statNumbers.forEach(function (el) {
       counterObserver.observe(el);
     });
+  } else if (statNumbers.length > 0) {
+    // Fallback: show final values immediately if IntersectionObserver is not supported
+    statNumbers.forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      if (!isNaN(target)) {
+        el.textContent = formatNumber(target);
+      }
+    });
   }
 
   // =========================================================================
@@ -342,6 +350,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     aosElements.forEach(function (el) {
       aosObserver.observe(el);
+    });
+  } else if (aosElements.length > 0) {
+    // Fallback: show all elements immediately if IntersectionObserver is not supported
+    aosElements.forEach(function (el) {
+      el.classList.add('aos-animate');
     });
   }
 
